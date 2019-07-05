@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>some calculations</title>
+    <style>body { font-family: "Times New Roman", Times, serif; font-size: 14px}</style>
+    <style type="text/css">
+        .table_setup  {border-collapse:collapse;border-spacing:0;}
+        .table_setup td{padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+
+
+        .cal  {border-collapse:collapse;border-spacing:0;}
+        .cal td{font-family:Arial, sans-serif;font-size:14px;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+        .cal th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+        .cal .cal-xx12{border-color:inherit;text-align:left}
+        .cal .cal-zz12{border-color:inherit;text-align:right}
+        .cal .cal-yy12{border-color:inherit;text-align:right}
+
+        .sum  {border-collapse:collapse;border-spacing:0;}
+        .sum td{font-family:Arial, sans-serif;font-size:14px;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+        .sum th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+        .sum .sum-xx12{border-color:inherit;text-align:left}
+        .sum .sum-zz12{border-color:inherit;text-align:right}
+        .sum .sum-yy12{border-color:inherit;text-align:right;vertical-align:top}
+
+
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<a href="some.html" target="_blank">Help</a>
+<a href="some.html" target="_blank">Documentation</a>
+<a href="some.html" target="_blank">About</a>
+
+
+<h1>Savings Interest Calculator</h1>
+<!-- <form method="post" action="MainServlet"> -->
+  <form method="post" action="processMainServlet">
+
+
+    <table class="table_setup">
+        <tr>
+            <td>Product Launch Date (format 2012-12-12):</td>
+            <td><input type="date" id="ProductLaunchDate" name="ProductLaunchDate" required/></td>
+            <td> Product Rate :</td>
+            <td><input type="number" id="ProductRate" name="ProductRate" step=".01" required/></td>
+            <td rowspan="2">Deposit Value :</td>
+            <td rowspan="2"><input type="number" id="DepositValue" name="DepositValue" step=".01" required/></td>
+        </tr>
+        <tr>
+            <td>Product End Date (format 2012-12-12):</td>
+            <td><input type="date" id="ProductEndDate" name="ProductEndDate" required/></td>
+            <td>Monthly Rate :</td>
+            <td><input type="number" id="MonthlyRate" name="MonthlyRate" step=".01" required/></td>
+        </tr>
+    </table>
+    <br/><br/>
+
+
+    <table class="cal">
+        <tr>
+            <th class="cal-xx12">Capitalisation Dates</th>
+            <th class="cal-xx12">Days&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th class="cal-xx12">Interest&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th class="cal-xx12">Compounded Value</th>
+            <th class="cal-xx12">Daily Accrual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        </tr>
+        <tr>
+            <td class="cal-zz12">date 1</td>
+            <td class="cal-zz12">number of days 1</td>
+            <td class="cal-zz12">Interest 1</td>
+            <td class="cal-zz12">Compounded 1</td>
+            <td class="cal-zz12">Accrual 1</td>
+        </tr>
+        <tr>
+            <td class="cal-yy12">date 2</td>
+            <td class="cal-yy12">number of days 2</td>
+            <td class="cal-yy12">Interest 2</td>
+            <td class="cal-yy12">Compounded 2</td>
+            <td class="cal-yy12">Accrual 2</td>
+        </tr>
+        <tr>
+            <td class="cal-yy12">date 3</td>
+            <td class="cal-yy12">number of days 3</td>
+            <td class="cal-yy12">Interest 3</td>
+            <td class="cal-yy12">Compounded 3</td>
+            <td class="cal-yy12">Accrual 3</td>
+        </tr>
+        <tr>
+            <td class="cal-yy12">date 4</td>
+            <td class="cal-yy12">number of days 4</td>
+            <td class="cal-yy12">Interest 4</td>
+            <td class="cal-yy12">Compounded 4</td>
+            <td class="cal-yy12">Accrual 4</td>
+        </tr>
+    </table>
+
+    <br/><br/>
+
+
+    <input type="submit" value="Calculate"/>
+
+    <br/><br/>
+
+    <table class="sum">
+        <tr>
+            <th class="sum-xx12">Months</th>
+            <th class="sum-xx12">Total Interest</th>
+            <th class="sum-xx12">Balance at Maturity</th>
+        </tr>
+        <tr>
+            <td class="sum-zz12">ab1</td>
+            <td class="sum-yy12">ab2</td>
+            <td class="sum-yy12">ab3</td>
+
+        </tr>
+
+    </table>
+
+    <br/><br/>
+
+    <input type="reset" value="Reset All"/><br/><br/>
+
+</form>
+
+</body>
+</html>
+
+
