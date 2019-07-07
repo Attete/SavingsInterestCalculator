@@ -23,7 +23,7 @@ public class MainServlet extends HttpServlet {
 
         PrintWriter out = res.getWriter();
 
- out.println("<html><head>");
+        out.println("<html><head>");
         out.println("<title>Tab title - Test tab title</title>");
         out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
         out.println("<style type=\"text/css\">");
@@ -57,7 +57,7 @@ public class MainServlet extends HttpServlet {
         out.println("<style>.sum .sum-yy12{text-align:right;vertical-align:top}</style>");
 
 
- out.println("</head>");
+        out.println("</head>");
 
 
 
@@ -88,15 +88,6 @@ public class MainServlet extends HttpServlet {
         out.println("<p>Some calculation: ProductRate + (13-ProductRate)+45 =  " + calc + "</p>");
         out.println("</fieldset>");
 */
-////////////////// Back button //////////////////////////////////////////////
-        out.println("<br><br>");
-        out.println("<button onclick=goBack()>Go Back</button>");
-        out.println("<script>");
-        out.println("function goBack() { window.history.back() }");
-        out.println("</script>");
-
-        out.println("<br><br>");
-        out.println("============================================================");
 
 
         //  out.println("</body></html>");
@@ -172,7 +163,6 @@ public class MainServlet extends HttpServlet {
 
 ////////////////// SUMMARY TABLE //////////////////////////////////////////////
 
-
         out.println("<h2><b>Summary</b></h2>");
         out.println("<table class=\"sum\">");
         out.println("<tr>");
@@ -188,6 +178,13 @@ public class MainServlet extends HttpServlet {
         out.println("</table>");
         out.println("<br/><br/>");
 
+////////////////// Back button //////////////////////////////////////////////
+        out.println("<br><br>");
+        out.println("<button onclick=goBack()>Go Back</button>");
+        out.println("<script>");
+        out.println("function goBack() { window.history.back() }");
+        out.println("</script>");
+        out.println("<br><br>");
 
         out.close();
     }
