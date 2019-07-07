@@ -23,15 +23,15 @@ public class MainServlet extends HttpServlet {
 
         PrintWriter out = res.getWriter();
 
-out.println("<html><head>");
+ out.println("<html><head>");
         out.println("<title>Tab title - Test tab title</title>");
         out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
         out.println("<style type=\"text/css\">");
 
-       //  out.println("\t<style>body { font-family: 'Times New Roman', " +
-       //         " 'Times' " +
-       //         "serif ; " +
-       //         "font-size: 14px; }</style>");
+        //  out.println("\t<style>body { font-family: 'Times New Roman', " +
+        //         " 'Times' " +
+        //         "serif ; " +
+        //         "font-size: 14px; }</style>");
 
         /// Style for Setup table ///////////////
         //out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
@@ -48,15 +48,16 @@ out.println("<html><head>");
         out.println("<style>.cal .cal-zz12{text-align:right}</style>");
         out.println("<style>.cal .cal-yy12{text-align:right}</style>");
 
+        /// Style for Summary table ///////////////
+        out.println("<style>.sum  {border-collapse:collapse;border-spacing:0;}</style>");
+        out.println("<style>.sum td{font-weight:normal;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
+        out.println("<style>.sum th{font-weight:bold;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
+        out.println("<style>.sum .sum-xx12{text-align:left}</style>");
+        out.println("<style>.sum .sum-zz12{text-align:right}</style>");
+        out.println("<style>.sum .sum-yy12{text-align:right;vertical-align:top}</style>");
 
 
-
-out.println("</head>");
-
-
-
-
-
+ out.println("</head>");
 
 
 
@@ -98,9 +99,7 @@ out.println("</head>");
         out.println("============================================================");
 
 
-
-      //  out.println("</body></html>");
-
+        //  out.println("</body></html>");
 
 
 ////////////////// SETUP TABLE //////////////////////////////////////////////
@@ -124,9 +123,8 @@ out.println("</head>");
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/><br/>");
-      //  out.println("");
-      //  out.println("");
-
+        //  out.println("");
+        //  out.println("");
 
 
 ////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
@@ -172,14 +170,23 @@ out.println("</head>");
         out.println(" <br/><br/>");
 
 
+////////////////// SUMMARY TABLE //////////////////////////////////////////////
 
 
-
-
-
-
-
-
+        out.println("<h2><b>Summary</b></h2>");
+        out.println("<table class=\"sum\">");
+        out.println("<tr>");
+        out.println("<th class=\"sum-xx12\">Months</th>");
+        out.println("<th class=\"sum-xx12\">Total Interest</th>");
+        out.println("<th class=\"sum-xx12\">Balance at Maturity</th>");
+        out.println("</tr>");
+        out.println("<tr>");
+        out.println("<td class=\"sum-zz12\">ab1</td>");
+        out.println("<td class=\"sum-yy12\">ab2</td>");
+        out.println("<td class=\"sum-yy12\">ab3</td>");
+        out.println("</tr>");
+        out.println("</table>");
+        out.println("<br/><br/>");
 
 
         out.close();
