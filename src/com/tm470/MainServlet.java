@@ -20,8 +20,10 @@ public class MainServlet extends HttpServlet {
         PrintWriter out = res.getWriter();
 
 
-   out.println("<html><head>");
-
+        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+        out.println("<!DOCTYPE html>");
+        out.println("<head>");
+        out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />");
         out.println("<title>SIC Result</title>");
         out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
         out.println("<style type=\"text/css\">");
@@ -89,16 +91,16 @@ public class MainServlet extends HttpServlet {
         out.println("<h2><b>Setup</b></h2>");
         out.println("<table class=\"table_setup\">");
         out.println("<tr>");
-        out.println("<td>Product Launch Date (format 2012-12-12):</td>");
+        out.println("<td><b>Product Launch Date (format 2012-12-12):</b></td>");
         out.println("<td>" + productLaunchDateReversed + "</td>");
-        out.println("<td> Product Rate :</td>");
+        out.println("<td><b>Product Rate :</></td>");
         out.println("<td>" + req.getParameter("ProductRate") + "</td>");
         out.println("<td rowspan=\"2\"> Deposit Value : " + " " + req.getParameter("DepositValue") + "</td>");
         out.println("</tr>");
         out.println("<tr>");
-        out.println("<td>Product End Date (format 2012-12-12):</td>");
+        out.println("<td><b>Product End Date (format 2012-12-12):</></td>");
         out.println("<td>" + productEndDateReversed + "</td>");
-        out.println("<td>Monthly Rate :</td>");
+        out.println("<td><b>Monthly Rate :</b></td>");
         out.println("<td>" + monthlyRate + "</td>");
         out.println("</tr>");
         out.println("</table>");
