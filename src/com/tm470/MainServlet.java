@@ -145,6 +145,14 @@ public class MainServlet extends HttpServlet {
         out.println("</table>");
         out.println("<br/>");
 
+////////////////// Back button //////////////////////////////////////////////
+        out.println("<button style=\"width: 10em; height: 3em; background-color: lightblue; font-weight: ;" +
+                "font: caption; color: black;\" onclick=goBack() >Go Back</button>");
+        out.println("<script>");
+        out.println("function goBack() { window.history.back() }");
+        out.println("</script>");
+        out.println("<br><br>");
+
 
 ////////////////// SUMMARY TABLE //////////////////////////////////////////////
         out.println("<h2><b>Summary</b></h2>");
@@ -161,16 +169,6 @@ public class MainServlet extends HttpServlet {
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/>");
-
-
-////////////////// Back button //////////////////////////////////////////////
-        out.println("<br><br>");
-        out.println("<button style=\"width: 10em; height: 3em; background-color: lightblue; font-weight: ;" +
-                "font: caption; color: black;\" onclick=goBack() >Go Back</button>");
-        out.println("<script>");
-        out.println("function goBack() { window.history.back() }");
-        out.println("</script>");
-        out.println("<br><br>");
 
 
         out.println("</body></html>");
