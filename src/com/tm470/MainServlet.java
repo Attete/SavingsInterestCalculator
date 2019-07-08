@@ -29,12 +29,13 @@ public class MainServlet extends HttpServlet {
         out.println("<style type=\"text/css\">");
 
         /// Style for Setup table ///////////////
-        out.println("<style>.table_setup  {font-weight:bold; border-collapse:collapse;border-spacing:0;}</style>");
-        out.println("<style>.table_setup td{padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
+      //  out.println("<style>.table_setup  {font-weight:bold;border-collapse:collapse;border-spacing:0;}</style>");
+      //  out.println("<style>.table_setup td{padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
+      //  out.println("<style>.table_setup th{font-weight:bold;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
 
         /// Style for Calculations table ///////////////
         out.println("<style>.cal  {border-collapse:collapse;border-spacing:0;}</style>");
-        out.println("<style>.cal td{font-weight:normal;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
+        out.println("<style>.cal td{padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");//font-weight:normal;
         out.println("<style>.cal th{font-weight:bold;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
         out.println("<style>.cal .cal-xx12{text-align:left}</style>");
         out.println("<style>.cal .cal-zz12{text-align:right}</style>");
@@ -88,20 +89,21 @@ public class MainServlet extends HttpServlet {
 
 
         out.println("<h1>Savings Interest Calculator</h1>");
+
         out.println("<h2><b>Setup</b></h2>");
-        out.println("<table class=\"table_setup\">");
+        out.println("<table class=\"cal\">");
         out.println("<tr>");
-        out.println("<td><b>Product Launch Date (format 2012-12-12):</b></td>");
-        out.println("<td>" + productLaunchDateReversed + "</td>");
-        out.println("<td><b>Product Rate :</></td>");
-        out.println("<td>" + req.getParameter("ProductRate") + "</td>");
-        out.println("<td rowspan=\"2\"> Deposit Value : " + " " + req.getParameter("DepositValue") + "</td>");
+        out.println("<th class=\"cal-xx12\">Product Launch Date (format 2012-12-12):</th>");
+        out.println("<td class=\"cal-xx12\">" + productLaunchDateReversed + "</th> ");
+        out.println("<th class=\"cal-xx12\">Product Rate :</th>");
+        out.println("<td class=\"cal-xx12\">" + req.getParameter("ProductRate") + "</th>");
+        out.println("<th rowspan=\"2\" class=\"cal-xx12\"> Deposit Value : " + " " + req.getParameter("DepositValue") + "</th>");
         out.println("</tr>");
         out.println("<tr>");
-        out.println("<td><b>Product End Date (format 2012-12-12):</></td>");
-        out.println("<td>" + productEndDateReversed + "</td>");
-        out.println("<td><b>Monthly Rate :</b></td>");
-        out.println("<td>" + monthlyRate + "</td>");
+        out.println("<th class=\"cal-xx12\">Product End Date (format 2012-12-12):</td>");
+        out.println("<td class=\"cal-zz12\">" + productEndDateReversed + "</td>");
+        out.println("<th class=\"cal-zz12\">Monthly Rate :</td>");
+        out.println("<td class=\"cal-zz12\">" + monthlyRate + "</td>");
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/><br/>");
@@ -109,6 +111,7 @@ public class MainServlet extends HttpServlet {
 
 ////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
         out.println("<h2><b>Calculations</b></h2>");
+
         out.println("<table class=\"cal\">");
         out.println("<tr>");
         out.println("<th class=\"cal-xx12\">Capitalisation Dates</th>");
