@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @WebServlet(name = "MainServlet", urlPatterns = {"/processMainServlet"})
 
@@ -17,11 +17,16 @@ public class MainServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         res.setContentType("text/html");
 
-        Date ProductLaunchDate = Date.valueOf(req.getParameter("ProductLaunchDate"));
-        Date ProductEndDate = Date.valueOf(req.getParameter("ProductEndDate"));
-        Double ProductRate = Double.valueOf(req.getParameter("ProductRate"));
-
         PrintWriter out = res.getWriter();
+
+        //Date ProductLaunchDate = Date.valueOf(req.getParameter("ProductLaunchDate"));
+        //Date ProductEndDate = Date.valueOf(req.getParameter("ProductEndDate"));
+        //Double ProductRate = Double.valueOf(req.getParameter("ProductRate"));
+
+        LocalDate productLaunchDate, productEndDate = null;//Setup dates
+        double productRateInput, depositValue = 0.0;//setup values
+
+
 
         out.println("<html><head>");
         out.println("<title>Tab title - Test tab title</title>");
@@ -119,7 +124,6 @@ public class MainServlet extends HttpServlet {
 
 
 ////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
-
         out.println("<h2><b>Calculations</b></h2>");
         out.println("<table class=\"cal\">");
         out.println("<tr>");
@@ -162,7 +166,6 @@ public class MainServlet extends HttpServlet {
 
 
 ////////////////// SUMMARY TABLE //////////////////////////////////////////////
-
         out.println("<h2><b>Summary</b></h2>");
         out.println("<table class=\"sum\">");
         out.println("<tr>");
@@ -177,6 +180,7 @@ public class MainServlet extends HttpServlet {
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/><br/>");
+
 
 ////////////////// Back button //////////////////////////////////////////////
         out.println("<br><br>");
