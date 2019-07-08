@@ -28,11 +28,6 @@ public class MainServlet extends HttpServlet {
         out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
         out.println("<style type=\"text/css\">");
 
-        /// Style for Setup table ///////////////
-      //  out.println("<style>.table_setup  {font-weight:bold;border-collapse:collapse;border-spacing:0;}</style>");
-      //  out.println("<style>.table_setup td{padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
-      //  out.println("<style>.table_setup th{font-weight:bold;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
-
         /// Style for Calculations table ///////////////
         out.println("<style>.cal  {border-collapse:collapse;border-spacing:0;}</style>");
         out.println("<style>.cal td{padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");//font-weight:normal;
