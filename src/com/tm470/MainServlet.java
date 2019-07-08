@@ -22,7 +22,7 @@ public class MainServlet extends HttpServlet {
 
    out.println("<html><head>");
 
-        out.println("<title>Tab title - Test tab title</title>");
+        out.println("<title>SIC Result</title>");
         out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
         out.println("<style type=\"text/css\">");
 
