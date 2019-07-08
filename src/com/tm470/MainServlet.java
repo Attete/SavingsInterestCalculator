@@ -61,14 +61,17 @@ public class MainServlet extends HttpServlet {
         LocalDate productLaunchDate, productEndDate;//Setup dates
         double productRateInput, depositValue = 0.0;//setup values
 
+
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
         productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
 
+        //Reversing ProductLaunchDate to display in dd/mm/yyyy format in Setup table
         String productLaunchDate1 = req.getParameter("ProductLaunchDate").substring(0,4);
         String productLaunchDate2 = req.getParameter("ProductLaunchDate").substring(5,7);
         String productLaunchDate3 = req.getParameter("ProductLaunchDate").substring(8);
         String productLaunchDateReversed = productLaunchDate3 + "/" + productLaunchDate2 + "/" + productLaunchDate1;
 
+        //Reversing ProductEndDate to display in dd/mm/yyyy format in Setup table
         String productEndDate1 = req.getParameter("ProductEndDate").substring(0,4);
         String productEndDate2 = req.getParameter("ProductEndDate").substring(5,7);
         String productEndDate3 = req.getParameter("ProductEndDate").substring(8);
@@ -84,9 +87,8 @@ public class MainServlet extends HttpServlet {
         out.println("<td>Product Launch Date (format 2012-12-12):</td>");
         out.println("<td>" + productLaunchDateReversed + "</td>");
         out.println("<td> Product Rate :</td>");
-        out.println("<td><input type=\"number\" id=\"ProductRate\" name=\"ProductRate\" step=\".01\" required/></td>");
-        out.println("<td rowspan=\"2\">Deposit Value :</td>");
-        out.println("<td rowspan=\"2\"><input type=\"number\" id=\"DepositValue\" name=\"DepositValue\" step=\".01\" required/></td>");
+        out.println("<td>" + req.getParameter("ProductRate") + "</td>");
+        out.println("<td rowspan=\"2\"> Deposit Value : " + " " + req.getParameter("DepositValue") + "</td>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td>Product End Date (format 2012-12-12):</td>");
