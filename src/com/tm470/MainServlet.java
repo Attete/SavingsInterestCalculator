@@ -59,9 +59,11 @@ public class MainServlet extends HttpServlet {
 
 
 
-        LocalDate productLaunchDate, productEndDate = null;//Setup dates
+        LocalDate productLaunchDate, productEndDate;//Setup dates
         double productRateInput, depositValue = 0.0;//setup values
 
+        productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
+        productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
 
 
 ////////////////// SETUP TABLE //////////////////////////////////////////////
@@ -71,7 +73,7 @@ public class MainServlet extends HttpServlet {
         out.println("<table class=\"table_setup\">");
         out.println("<tr>");
         out.println("<td>Product Launch Date (format 2012-12-12):</td>");
-        out.println("<td>" + req.getParameter("ProductLaunchDate") + "</td>");
+        out.println("<td>" + productLaunchDate + "</td>");
         out.println("<td> Product Rate :</td>");
         out.println("<td><input type=\"number\" id=\"ProductRate\" name=\"ProductRate\" step=\".01\" required/></td>");
         out.println("<td rowspan=\"2\">Deposit Value :</td>");
@@ -79,7 +81,7 @@ public class MainServlet extends HttpServlet {
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td>Product End Date (format 2012-12-12):</td>");
-        out.println("<td>" + req.getParameter("ProductEndDate") + "</td>");
+        out.println("<td>" + productEndDate + "</td>");
         out.println("<td>Monthly Rate :</td>");
         out.println("<td><input type=\"number\" id=\"MonthlyRate\" name=\"MonthlyRate\" step=\".01\" required/></td>");
         out.println("</tr>");
