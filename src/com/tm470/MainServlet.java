@@ -21,23 +21,16 @@ public class MainServlet extends HttpServlet {
 
 
    out.println("<html><head>");
+
         out.println("<title>Tab title - Test tab title</title>");
         out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
         out.println("<style type=\"text/css\">");
 
-        //  out.println("\t<style>body { font-family: 'Times New Roman', " +
-        //         " 'Times' " +
-        //         "serif ; " +
-        //         "font-size: 14px; }</style>");
-
         /// Style for Setup table ///////////////
-        //out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
-        //out.println("<style type=\"text/css\">");
         out.println("<style>.table_setup  {font-weight:bold; border-collapse:collapse;border-spacing:0;}</style>");
         out.println("<style>.table_setup td{padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
 
         /// Style for Calculations table ///////////////
-
         out.println("<style>.cal  {border-collapse:collapse;border-spacing:0;}</style>");
         out.println("<style>.cal td{font-weight:normal;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
         out.println("<style>.cal th{font-weight:bold;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
@@ -55,7 +48,11 @@ public class MainServlet extends HttpServlet {
 
     out.println("</head>");
 
+    out.println("<body>");
 
+        out.println("<a href=\"help.html\" target=\"_blank\">Help</a>");
+        out.println("<a href=\"documentation.html\" target=\"_blank\">Documentation</a>");
+        out.println("<a href=\"about.html\" target=\"_blank\">About</a>");
 
         LocalDate productLaunchDate, productEndDate;//Setup dates
         double productRate= 0.0, depositValue = 0.0, monthlyRate;//setup values
