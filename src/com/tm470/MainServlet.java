@@ -37,7 +37,6 @@ public class MainServlet extends HttpServlet {
         out.println("<style>.cal .cal-yy12{text-align:right}</style>");
 
         /// Style for Summary table ///////////////
-        out.println("<style>.sum  {border-collapse:collapse;border-spacing:0;}</style>");
         out.println("<style>.sum td{font-weight:normal;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
         out.println("<style>.sum th{font-weight:bold;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
         out.println("<style>.sum .sum-xx12{text-align:left}</style>");
@@ -101,7 +100,7 @@ public class MainServlet extends HttpServlet {
         out.println("<td class=\"cal-zz12\">" + monthlyRate + "</td>");
         out.println("</tr>");
         out.println("</table>");
-        out.println("<br/><br/>");
+        out.println("<br/>");
 
 
 ////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
@@ -144,7 +143,7 @@ public class MainServlet extends HttpServlet {
         out.println("<td class=\"cal-yy12\">Accrual 4</td>");
         out.println("<tr>");
         out.println("</table>");
-        out.println(" <br/><br/>");
+        out.println("<br/>");
 
 
 ////////////////// SUMMARY TABLE //////////////////////////////////////////////
@@ -161,7 +160,7 @@ public class MainServlet extends HttpServlet {
         out.println("<td class=\"sum-yy12\">ab3</td>");
         out.println("</tr>");
         out.println("</table>");
-        out.println("<br/><br/>");
+        out.println("<br/>");
 
 
 ////////////////// Back button //////////////////////////////////////////////
