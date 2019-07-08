@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "MainServlet", urlPatterns = {"/processMainServlet"})
 
@@ -18,14 +19,6 @@ public class MainServlet extends HttpServlet {
         res.setContentType("text/html");
 
         PrintWriter out = res.getWriter();
-
-        //Date ProductLaunchDate = Date.valueOf(req.getParameter("ProductLaunchDate"));
-        //Date ProductEndDate = Date.valueOf(req.getParameter("ProductEndDate"));
-        //Double ProductRate = Double.valueOf(req.getParameter("ProductRate"));
-
-        LocalDate productLaunchDate, productEndDate = null;//Setup dates
-        double productRateInput, depositValue = 0.0;//setup values
-
 
 
         out.println("<html><head>");
@@ -66,36 +59,9 @@ public class MainServlet extends HttpServlet {
 
 
 
-     /*   out.println("<h1>Test header - servlet</h1>");
-        out.println("<body>");
+        LocalDate productLaunchDate, productEndDate = null;//Setup dates
+        double productRateInput, depositValue = 0.0;//setup values
 
-        String doctype = "<!DOCTYPE html>\n";
-
-        out.println("<fieldset>");
-        out.println("<legend>Section header 1:</legend>");
-        out.println(doctype +
-                "<html>\n" +
-                "<head><title></title></head>\n" +
-                "<ul>\n" +
-                "<li><b>ProductLaunchDate</b>: " + ProductLaunchDate + "\n" +
-                "<li><b>ProductEndDate</b>: " + ProductEndDate + "\n" +
-                "<li><b>ProductRate</b>: " + ProductRate + "\n" +
-                "</ul>\n" +
-                "</body>" +
-                "</html>"
-        );
-        out.println("</fieldset>");
-
-
-        out.println("<fieldset>");
-        out.println("<legend>Section header 2:</legend>");
-        Double calc = (13.00 - ProductRate)/45;
-        out.println("<p>Some calculation: ProductRate + (13-ProductRate)+45 =  " + calc + "</p>");
-        out.println("</fieldset>");
-*/
-
-
-        //  out.println("</body></html>");
 
 
 ////////////////// SETUP TABLE //////////////////////////////////////////////
@@ -105,7 +71,7 @@ public class MainServlet extends HttpServlet {
         out.println("<table class=\"table_setup\">");
         out.println("<tr>");
         out.println("<td>Product Launch Date (format 2012-12-12):</td>");
-        out.println("<td><input type=\"date\" id=\"ProductLaunchDate\" name=\"ProductLaunchDate\" required/></td>");
+        out.println("<td>" + req.getParameter("ProductLaunchDate") + "</td>");
         out.println("<td> Product Rate :</td>");
         out.println("<td><input type=\"number\" id=\"ProductRate\" name=\"ProductRate\" step=\".01\" required/></td>");
         out.println("<td rowspan=\"2\">Deposit Value :</td>");
@@ -113,14 +79,12 @@ public class MainServlet extends HttpServlet {
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td>Product End Date (format 2012-12-12):</td>");
-        out.println("<td><input type=\"date\" id=\"ProductEndDate\" name=\"ProductEndDate\" required/></td>");
+        out.println("<td>" + req.getParameter("ProductEndDate") + "</td>");
         out.println("<td>Monthly Rate :</td>");
         out.println("<td><input type=\"number\" id=\"MonthlyRate\" name=\"MonthlyRate\" step=\".01\" required/></td>");
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/><br/>");
-        //  out.println("");
-        //  out.println("");
 
 
 ////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
@@ -191,5 +155,9 @@ public class MainServlet extends HttpServlet {
         out.println("<br><br>");
 
         out.close();
+
+        out.println("</body></html>");
     }
+
+
 }
