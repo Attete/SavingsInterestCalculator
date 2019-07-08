@@ -20,7 +20,7 @@ public class MainServlet extends HttpServlet {
         PrintWriter out = res.getWriter();
 
 
-        out.println("<html><head>");
+   out.println("<html><head>");
         out.println("<title>Tab title - Test tab title</title>");
         out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
         out.println("<style type=\"text/css\">");
@@ -53,8 +53,7 @@ public class MainServlet extends HttpServlet {
         out.println("<style>.sum .sum-zz12{text-align:right}</style>");
         out.println("<style>.sum .sum-yy12{text-align:right;vertical-align:top}</style>");
 
-
-        out.println("</head>");
+    out.println("</head>");
 
 
 
@@ -161,15 +160,16 @@ public class MainServlet extends HttpServlet {
 
 ////////////////// Back button //////////////////////////////////////////////
         out.println("<br><br>");
-        out.println("<button onclick=goBack()>Go Back</button>");
+        out.println("<button style=\"width: 10em; height: 3em; background-color: lightblue; font-weight: ;" +
+                "font: caption; color: black;\" onclick=goBack() >Go Back</button>");
         out.println("<script>");
         out.println("function goBack() { window.history.back() }");
         out.println("</script>");
         out.println("<br><br>");
 
-        out.close();
 
         out.println("</body></html>");
+        out.close();
     }
 
 
