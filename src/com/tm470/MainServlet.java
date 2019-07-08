@@ -58,11 +58,13 @@ public class MainServlet extends HttpServlet {
 
 
         LocalDate productLaunchDate, productEndDate;//Setup dates
-        double productRateInput, depositValue = 0.0;//setup values
+        double productRate= 0.0, depositValue = 0.0, monthlyRate;//setup values
 
 
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
         productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
+        productRate = Double.parseDouble(req.getParameter("ProductRate"));//parsing String to double
+
 
         //Reversing ProductLaunchDate to display in dd/mm/yyyy format in Setup table
         String productLaunchDate1 = req.getParameter("ProductLaunchDate").substring(0,4);
@@ -79,6 +81,13 @@ public class MainServlet extends HttpServlet {
 
 ////////////////// SETUP TABLE //////////////////////////////////////////////
 
+        //calculate nominal value of the productRate
+        monthlyRate = 1200 * (Math.pow((1+((productRate/100))),0.083333333)-1) ;
+        //rounds the monthlyRate to two decimal places
+        monthlyRate = Math.round(monthlyRate * 100);
+        monthlyRate = monthlyRate/100;
+
+
         out.println("<h1>Savings Interest Calculator</h1>");
         out.println("<h2><b>Setup</b></h2>");
         out.println("<table class=\"table_setup\">");
@@ -93,7 +102,7 @@ public class MainServlet extends HttpServlet {
         out.println("<td>Product End Date (format 2012-12-12):</td>");
         out.println("<td>" + productEndDateReversed + "</td>");
         out.println("<td>Monthly Rate :</td>");
-        out.println("<td><input type=\"number\" id=\"MonthlyRate\" name=\"MonthlyRate\" step=\".01\" required/></td>");
+        out.println("<td>" + monthlyRate + "</td>");
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/><br/>");
