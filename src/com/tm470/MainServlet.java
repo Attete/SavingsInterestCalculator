@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @WebServlet(name = "MainServlet", urlPatterns = {"/processMainServlet"})
 
@@ -60,12 +61,27 @@ public class MainServlet extends HttpServlet {
         productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
         productRate = Double.parseDouble(req.getParameter("ProductRate"));//parsing String to double
         date1 = LocalDate.parse(req.getParameter("date1"));//Capitalisation date1 from 'Calculations' table in index.html
-      //  date2 = LocalDate.parse(req.getParameter("date2"));//Capitalisation date2 from 'Calculations' table in index.html
-      //  date3 = LocalDate.parse(req.getParameter("date3"));//Capitalisation date3 from 'Calculations' table in index.html
-      //  date4 = LocalDate.parse(req.getParameter("date4"));//Capitalisation date4 from 'Calculations' table in index.html
+        date2 = LocalDate.parse(req.getParameter("date2"));//Capitalisation date2 from 'Calculations' table in index.html
+        date3 = LocalDate.parse(req.getParameter("date3"));//Capitalisation date3 from 'Calculations' table in index.html
+        date4 = LocalDate.parse(req.getParameter("date4"));//Capitalisation date4 from 'Calculations' table in index.html
 
-//LocalDate somedate = LocalDate.parse("1999-09-09");
+        long period1, period2, period3, period4;
 
+        //compares the days difference between the date stored in productLaunchDate
+        //and the date stored in date1 +1 as required for the 1st year of savings
+        period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
+
+        //compares the days difference between the date stored in date1
+        //and the date stored in date2
+        period2 = ChronoUnit.DAYS.between(date1, date2);
+
+        //compares the days difference between the date stored in date2
+        //and the date stored in date3
+        period3 = ChronoUnit.DAYS.between(date2, date3);
+
+        //compares the days difference between the date stored in date3
+        //and the date stored in date4
+        period4 = ChronoUnit.DAYS.between(date3, date4);
 
         //Reversing ProductLaunchDate to display in dd/mm/yyyy format in Setup table
         String productLaunchDate1 = req.getParameter("ProductLaunchDate").substring(0,4);
@@ -147,28 +163,28 @@ public class MainServlet extends HttpServlet {
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td class=\"cal-zz12\">" + date1Reversed + "</td>");
-        out.println("<td class=\"cal-zz12\">number of days 1</td>");
+        out.println("<td class=\"cal-zz12\">" + period1 + "</td>");
         out.println("<td class=\"cal-zz12\">Interest 1</td>");
         out.println("<td class=\"cal-zz12\">Compounded 1</td>");
         out.println("<td class=\"cal-zz12\">Accrual 1</td>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td class=\"cal-yy12\">" + date2Reversed + "</td>");
-        out.println("<td class=\"cal-yy12\">number of days 2</td>");
+        out.println("<td class=\"cal-yy12\">" + period2 +"</td>");
         out.println("<td class=\"cal-yy12\">Interest 2</td>");
         out.println("<td class=\"cal-yy12\">Compounded 2</td>");
         out.println("<td class=\"cal-yy12\">Accrual 2</td>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td class=\"cal-yy12\">" + date3Reversed + "</td>");
-        out.println("<td class=\"cal-yy12\">number of days 3</td>");
+        out.println("<td class=\"cal-yy12\">" + period3 + "</td>");
         out.println("<td class=\"cal-yy12\">Interest 3</td>");
         out.println("<td class=\"cal-yy12\">Compounded 3</td>");
         out.println("<td class=\"cal-yy12\">Accrual 3</td>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td class=\"cal-yy12\">" + date4Reversed + "</td>");
-        out.println("<td class=\"cal-yy12\">number of days 4</td>");
+        out.println("<td class=\"cal-yy12\">"+ period4 +"</td>");
         out.println("<td class=\"cal-yy12\">Interest 4</td>");
         out.println("<td class=\"cal-yy12\">Compounded 4</td>");
         out.println("<td class=\"cal-yy12\">Accrual 4</td>");
