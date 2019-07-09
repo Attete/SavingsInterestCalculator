@@ -180,7 +180,9 @@ public class MainServlet extends HttpServlet {
         out.println("<button style=\"width: 10em; height: 3em; background-color: lightblue; font-weight: ;" +
                 "font: caption; color: black;\" onclick=goBack() >Go Back</button>");
         out.println("<script>");
-        out.println("function goBack() { window.history.back() }");
+        out.println("function goBack() { " +
+                "window.history.back() " +
+                "}");
         out.println("</script>");
         out.println("<br><br>");
 
