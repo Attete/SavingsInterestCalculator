@@ -60,9 +60,9 @@ public class MainServlet extends HttpServlet {
         productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
         productRate = Double.parseDouble(req.getParameter("ProductRate"));//parsing String to double
         date1 = LocalDate.parse(req.getParameter("date1"));//Capitalisation date1 from 'Calculations' table in index.html
-        date2 = LocalDate.parse(req.getParameter("date2"));//Capitalisation date2 from 'Calculations' table in index.html
-        date3 = LocalDate.parse(req.getParameter("date3"));//Capitalisation date3 from 'Calculations' table in index.html
-        date4 = LocalDate.parse(req.getParameter("date4"));//Capitalisation date4 from 'Calculations' table in index.html
+      //  date2 = LocalDate.parse(req.getParameter("date2"));//Capitalisation date2 from 'Calculations' table in index.html
+      //  date3 = LocalDate.parse(req.getParameter("date3"));//Capitalisation date3 from 'Calculations' table in index.html
+      //  date4 = LocalDate.parse(req.getParameter("date4"));//Capitalisation date4 from 'Calculations' table in index.html
 
 //LocalDate somedate = LocalDate.parse("1999-09-09");
 

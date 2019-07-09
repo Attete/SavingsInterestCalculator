@@ -38,6 +38,16 @@
             background-color: palegoldenrod;
         }
 </style>
+
+    <script>
+        function isDateEmpty(aDate){
+             if(aDate.value == "") {
+
+                 aDate.value = "1900-01-01";
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -58,7 +68,7 @@
     <table class="cal">
         <tr>
             <th class="cal-xx12">Product Launch Date :</th>
-            <td><input type="date" id="ProductLaunchDate" name="ProductLaunchDate" required/></td>
+            <td><input type="date" value="2012-02-03" id="ProductLaunchDate" name="ProductLaunchDate" required/></td>
             <th class="cal-xx12"> Product Rate :</th>
             <td><input type="number" value="12.5" id="ProductRate" name="ProductRate" step=".01" required/></td>
             <th class="cal-xx12" rowspan="2">Deposit Value :</th>
@@ -66,7 +76,7 @@
         </tr>
       <tr>
             <th class="cal-xx12">Product End Date :</th>
-            <td><input type="date" id="ProductEndDate" name="ProductEndDate" required/></td>
+            <td><input type="date" value="2012-02-03" id="ProductEndDate" name="ProductEndDate" required/></td>
             <th class="cal-xx12">Monthly Rate :</th>
             <td><input type="number" value="13.5" id="MonthlyRate" name="MonthlyRate" step=".01" required/></td>
         </tr>
@@ -88,28 +98,28 @@
             <th class="cal-xx12">Daily Accrual</th>
         </tr>
         <tr>
-            <td class="cal-zz12"><input type="date" id="date1" name="date1" required/></td>
+            <td class="cal-zz12"><input type="date" value="2012-02-03" id="date1" name="date1" required/></td>
             <td class="cal-zz12">number of days 1</td>
             <td class="cal-zz12">Interest 1</td>
             <td class="cal-zz12">Compounded 1</td>
             <td class="cal-zz12">Accrual 1</td>
         </tr>
       <tr>
-            <td class="cal-yy12"><input type="date" value="2012-02-02" id="date2" name="date2"/></td>
+            <td class="cal-yy12"><input type="date" id="date2" name="date2"/></td>
             <td class="cal-yy12">number of days 2</td>
             <td class="cal-yy12">Interest 2</td>
             <td class="cal-yy12">Compounded 2</td>
             <td class="cal-yy12">Accrual 2</td>
         </tr>
         <tr>
-            <td class="cal-yy12"><input type="date" value="2012-02-03" id="date3" name="date3"/></td>
+            <td class="cal-yy12"><input type="date" id="date3" name="date3"/></td>
             <td class="cal-yy12">number of days 3</td>
             <td class="cal-yy12">Interest 3</td>
             <td class="cal-yy12">Compounded 3</td>
             <td class="cal-yy12">Accrual 3</td>
         </tr>
         <tr>
-            <td class="cal-yy12"><input type="date" value="2012-02-04" id="date4" name="date4"/></td>
+            <td class="cal-yy12"><input type="date" id="date4" name="date4"/></td>
             <td class="cal-yy12">number of days 4</td>
             <td class="cal-yy12">Interest 4</td>
             <td class="cal-yy12">Compounded 4</td>
@@ -118,7 +128,8 @@
     </table>
    <br/><br/>
 
-    <input type="submit"  value="Calculate" id="calculate"/>
+    <input type="submit" onclick="isDateEmpty(date2), isDateEmpty(date3), isDateEmpty(date4)" value="Calculate" id="calculate"/>
+
 
     <br/><br/>
 
