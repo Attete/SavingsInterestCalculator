@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.temporal.ChronoUnit;
 
 @WebServlet(name = "MainServlet", urlPatterns = {"/processMainServlet"})
@@ -56,6 +57,9 @@ public class MainServlet extends HttpServlet {
         double productRate= 0.0, depositValue = 0.0, monthlyRate;//setup values
         LocalDate date1, date2, date3, date4;// to store Capitalisation Dates from 'Calculations' table in index.html
 
+        long period1, period2, period3, period4;
+
+        long periodIsLeap = 0;//to calculate if there is an additional day in a year
 
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
         productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
@@ -65,7 +69,7 @@ public class MainServlet extends HttpServlet {
         date3 = LocalDate.parse(req.getParameter("date3"));//Capitalisation date3 from 'Calculations' table in index.html
         date4 = LocalDate.parse(req.getParameter("date4"));//Capitalisation date4 from 'Calculations' table in index.html
 
-        long period1, period2, period3, period4;
+
 
         //compares the days difference between the date stored in productLaunchDate
         //and the date stored in date1 +1 as required for the 1st year of savings
@@ -130,8 +134,9 @@ public class MainServlet extends HttpServlet {
         monthlyRate = monthlyRate/100;
 
 
-        out.println("<h1>Savings Interest Calculator</h1>");
 
+
+        out.println("<h1>Savings Interest Calculator</h1>");
         out.println("<h2><b>Setup</b></h2>");
         out.println("<table class=\"cal\">");
         out.println("<tr>");
@@ -148,7 +153,41 @@ public class MainServlet extends HttpServlet {
         out.println("<td class=\"cal-zz12\">" + monthlyRate + "</td>");
         out.println("</tr>");
         out.println("</table>");
-        out.println("<br/>");
+        out.println("<br/><br/>");
+
+        //Daily Accrual calculation for the 1st year, where leap year is taken into account
+        //..if the productLaunchDate OR date1' fall on a leap year
+        if(productLaunchDate.isLeapYear() || date1.isLeapYear())  {
+
+            if(productLaunchDate.isLeapYear()){
+                //create a local variable with date 29/02/'Product Launch Year'..
+                LocalDate feb29Launch = LocalDate.of(productLaunchDate.getYear(), Month.FEBRUARY, 29);
+
+                if(((productLaunchDate.isBefore(feb29Launch)) || (productLaunchDate.isEqual(feb29Launch))) &&
+                        (date1.isAfter(feb29Launch))) {
+
+                    periodIsLeap = 366;
+                } else {
+                    periodIsLeap = 365;
+                }
+
+            } else if(date1.isLeapYear()) {
+                //create a local variable with date 29/02/'date1'..
+                LocalDate feb29Cap = LocalDate.of(date1.getYear(), Month.FEBRUARY, 29);
+
+                if(((date1.isAfter(feb29Cap)) || (date1.isEqual(feb29Cap))) &&
+                        (productLaunchDate.isBefore(feb29Cap))) {
+
+                    periodIsLeap = 366;
+                } else {
+                    periodIsLeap = 365;
+                }
+            }
+
+        } else {
+            periodIsLeap = 365;
+        }
+
 
 
 ////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
@@ -192,16 +231,6 @@ public class MainServlet extends HttpServlet {
         out.println("</table>");
         out.println("<br/>");
 
-////////////////// Back button //////////////////////////////////////////////
-        out.println("<button style=\"width: 10em; height: 3em; background-color: lightblue; font-weight: ;" +
-                "font: caption; color: black;\" onclick=goBack() >Go Back</button>");
-        out.println("<script>");
-        out.println("function goBack() { " +
-                "window.history.back() " +
-                "}");
-        out.println("</script>");
-        out.println("<br><br>");
-
 
 ////////////////// SUMMARY TABLE //////////////////////////////////////////////
         out.println("<h2><b>Summary</b></h2>");
@@ -219,6 +248,16 @@ public class MainServlet extends HttpServlet {
         out.println("</table>");
         out.println("<br/>");
 
+
+////////////////// Back button //////////////////////////////////////////////
+        out.println("<button style=\"width: 10em; height: 3em; background-color: lightblue; font-weight: ;" +
+                "font: caption; color: black;\" onclick=goBack() >Go Back</button>");
+        out.println("<script>");
+        out.println("function goBack() { " +
+                "window.history.back() " +
+                "}");
+        out.println("</script>");
+        out.println("<br><br>");
 
         out.println("</body></html>");
         out.close();
