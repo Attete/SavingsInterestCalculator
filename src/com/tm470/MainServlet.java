@@ -63,6 +63,22 @@ public class MainServlet extends HttpServlet {
 
         long periodIsLeap = 0;//to calculate if there is an additional day in a leap year
 
+        double dailyAccrual1;
+        double dailyAccrual2;
+        double dailyAccrual3;
+        double dailyAccrual4;
+
+        double interest1;
+        double interest2;
+        double interest3;
+        double interest4;
+
+        double compoundedValue1;
+        double compoundedValue2;
+        double compoundedValue3;
+        double compoundedValue4;
+
+
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
         productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
         productRate = Double.parseDouble(req.getParameter("ProductRate"));//parsing String to double
