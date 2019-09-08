@@ -54,12 +54,14 @@ public class MainServlet extends HttpServlet {
         out.println("<a href=\"about.html\" target=\"_blank\">About</a>");
 
         LocalDate productLaunchDate, productEndDate;//Setup dates
-        double productRate= 0.0, depositValue = 0.0, monthlyRate;//setup values
+        double productRate= 0.0, depositValue = 0.0,  monthlyRate;//setup values
+        depositValue = Double.parseDouble(req.getParameter("DepositValue"));
+
         LocalDate date1, date2, date3, date4;// to store Capitalisation Dates from 'Calculations' table in index.html
 
         long period1, period2, period3, period4;
 
-        long periodIsLeap = 0;//to calculate if there is an additional day in a year
+        long periodIsLeap = 0;//to calculate if there is an additional day in a leap year
 
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
         productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
@@ -134,8 +136,6 @@ public class MainServlet extends HttpServlet {
         monthlyRate = monthlyRate/100;
 
 
-
-
         out.println("<h1>Savings Interest Calculator</h1>");
         out.println("<h2><b>Setup</b></h2>");
         out.println("<table class=\"cal\">");
@@ -144,7 +144,7 @@ public class MainServlet extends HttpServlet {
         out.println("<td class=\"cal-xx12\">" + productLaunchDateReversed + "</th> ");
         out.println("<th class=\"cal-xx12\">Product Rate :</th>");
         out.println("<td class=\"cal-xx12\">" + req.getParameter("ProductRate") + "</th>");
-        out.println("<th rowspan=\"2\" class=\"cal-xx12\"> Deposit Value : " + " " + req.getParameter("DepositValue") + "</th>");
+        out.println("<th rowspan=\"2\" class=\"cal-xx12\"> Deposit Value : " + " " + depositValue + "</th>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<th class=\"cal-xx12\">Product End Date :</td>");
@@ -187,7 +187,6 @@ public class MainServlet extends HttpServlet {
         } else {
             periodIsLeap = 365;
         }
-
 
 
 ////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
