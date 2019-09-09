@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
 
 @WebServlet(name = "MainServlet", urlPatterns = {"/processMainServlet"})
@@ -57,26 +58,28 @@ public class MainServlet extends HttpServlet {
         double productRate= 0.0, depositValue = 0.0,  monthlyRate;//setup values
         depositValue = Double.parseDouble(req.getParameter("DepositValue"));
 
+        int numberOfMonths = 0; //counts number of months from productLaunchDate to last capitalisation date 'date2', 'date3', or 'date4'
+
         LocalDate date1, date2, date3, date4;// to store Capitalisation Dates from 'Calculations' table in index.html
 
-        long period1, period2, period3, period4;
+        long period1=0, period2=0, period3=0, period4=0;
 
         long periodIsLeap = 0;//to calculate if there is an additional day in a leap year
 
         double dailyAccrual1;
         double dailyAccrual2;
-        double dailyAccrual3=0;
-        double dailyAccrual4=0;
+        double dailyAccrual3;
+        double dailyAccrual4;
 
         double interest1;
         double interest2;
-        double interest3=0;
-        double interest4=0;
+        double interest3;
+        double interest4;
 
         double compoundedValue1;
         double compoundedValue2;
-        double compoundedValue3=0;
-        double compoundedValue4=0;
+        double compoundedValue3;
+        double compoundedValue4;
 
 
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
@@ -89,21 +92,86 @@ public class MainServlet extends HttpServlet {
 
 
 
-        //compares the days difference between the date stored in productLaunchDate
-        //and the date stored in date1 +1 as required for the 1st year of savings
-        period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
+        if( //if all dates are provided..
+                !(date1.isEqual(LocalDate.parse("1900-01-01")))
+                        && !(date2.isEqual(LocalDate.parse("1900-01-01")))
+                        && !(date3.isEqual(LocalDate.parse("1900-01-01")))
+                        && !(date4.isEqual(LocalDate.parse("1900-01-01")))){
 
-        //compares the days difference between the date stored in date1
-        //and the date stored in date2
-        period2 = ChronoUnit.DAYS.between(date1, date2);
+            //compares the days difference between the date stored in productLaunchDate
+            //and the date stored in date1 +1 as required for the 1st year of savings
+            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
 
-        //compares the days difference between the date stored in date2
-        //and the date stored in date3
-        period3 = ChronoUnit.DAYS.between(date2, date3);
+            //compares the days difference between the date stored in date1
+            //and the date stored in date2
+            period2 = ChronoUnit.DAYS.between(date1, date2);
 
-        //compares the days difference between the date stored in date3
-        //and the date stored in date4
-        period4 = ChronoUnit.DAYS.between(date3, date4);
+            //compares the days difference between the date stored in date2
+            //and the date stored in date3
+            period3 = ChronoUnit.DAYS.between(date2, date3);
+
+            //compares the days difference between the date stored in date3
+            //and the date stored in date4
+            period4 = ChronoUnit.DAYS.between(date3, date4);
+        }
+
+        if( //if date1 is provided and other is missing ..
+                !(date1.isEqual(LocalDate.parse("1900-01-01")))
+                        &&
+                        ( (date2.isEqual(LocalDate.parse("1900-01-01"))) ||
+                                (date3.isEqual(LocalDate.parse("1900-01-01"))) ||
+                                (date4.isEqual(LocalDate.parse("1900-01-01"))))){
+
+
+            //compares the days difference between the date stored in productLaunchDate
+            //and the date stored in date1 +1 as required for the 1st year of savings
+            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
+
+            period2 = 0;
+            period3 = 0;
+            period4 = 0;
+
+
+
+        }
+
+        if( //if date1 and date2 are provided and other is missing ..
+                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))))
+                        && ( (date3.isEqual(LocalDate.parse("1900-01-01"))) || (date4.isEqual(LocalDate.parse("1900-01-01"))))) {
+
+            //compares the days difference between the date stored in productLaunchDate
+            //and the date stored in date1 +1 as required for the 1st year of savings
+            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
+
+            //compares the days difference between the date stored in date1
+            //and the date stored in date2
+            period2 = ChronoUnit.DAYS.between(date1, date2);
+
+            period3 = 0;
+            period4 = 0;
+
+        }
+
+
+        if( //if date1,date2 and date3 are provided, but date4 is missing ..
+                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))) && !(date3.isEqual(LocalDate.parse("1900-01-01"))))
+                        &&  (date4.isEqual(LocalDate.parse("1900-01-01")))) {
+
+            //compares the days difference between the date stored in productLaunchDate
+            //and the date stored in date1 +1 as required for the 1st year of savings
+            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
+
+            //compares the days difference between the date stored in date1
+            //and the date stored in date2
+            period2 = ChronoUnit.DAYS.between(date1, date2);
+
+            //compares the days difference between the date stored in date2
+            //and the date stored in date3
+            period3 = ChronoUnit.DAYS.between(date2, date3);
+
+            period4 = 0;
+        }
+
 
         //Reversing ProductLaunchDate to display in dd/mm/yyyy format in Setup table
         String productLaunchDate1 = req.getParameter("ProductLaunchDate").substring(0,4);
@@ -265,8 +333,6 @@ public class MainServlet extends HttpServlet {
         compoundedValue4 = Math.round(compoundedValue4 * 100d) / 100d; //rounds the value to two decimal places
 
 
-
-
         out.println("<h2><b>Calculations</b></h2>");
         out.println("<table class=\"cal\">");
         out.println("<tr>");
@@ -309,6 +375,48 @@ public class MainServlet extends HttpServlet {
 
 
 ////////////////// SUMMARY TABLE //////////////////////////////////////////////
+
+
+
+        //increases number of months for the 'Months' output in 'Summary' pane
+
+        if( //if all dates are provided..
+                !(date1.isEqual(LocalDate.parse("1900-01-01")))
+         && !(date2.isEqual(LocalDate.parse("1900-01-01")))
+         && !(date3.isEqual(LocalDate.parse("1900-01-01")))
+         && !(date4.isEqual(LocalDate.parse("1900-01-01")))){
+
+            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date4));
+         }
+
+        if( //if date1 is provided and any other is missing ..
+                !(date1.isEqual(LocalDate.parse("1900-01-01")))
+                &&
+                    ( (date2.isEqual(LocalDate.parse("1900-01-01"))) ||
+                      (date3.isEqual(LocalDate.parse("1900-01-01"))) ||
+                      (date4.isEqual(LocalDate.parse("1900-01-01"))))){
+
+            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date1));
+          }
+
+        if( //if date1 and date2 are provided and any other is missing ..
+                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))))
+                    && ( (date3.isEqual(LocalDate.parse("1900-01-01"))) || (date4.isEqual(LocalDate.parse("1900-01-01"))))) {
+
+            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date2));
+        }
+
+
+        if( //if date1,date2 and date3 are provided, but date4 is missing ..
+                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))) && !(date3.isEqual(LocalDate.parse("1900-01-01"))))
+                        &&  (date4.isEqual(LocalDate.parse("1900-01-01")))) {
+
+            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date3));
+        }
+
+
+
+
         out.println("<h2><b>Summary</b></h2>");
         out.println("<table class=\"sum\">");
         out.println("<tr>");
@@ -317,7 +425,7 @@ public class MainServlet extends HttpServlet {
         out.println("<th class=\"sum-xx12\">Balance at Maturity</th>");
         out.println("</tr>");
         out.println("<tr>");
-        out.println("<td class=\"sum-zz12\">ab1</td>");
+        out.println("<td class=\"sum-zz12\">" + numberOfMonths + "</td>");
         out.println("<td class=\"sum-yy12\">ab2</td>");
         out.println("<td class=\"sum-yy12\">ab3</td>");
         out.println("</tr>");
