@@ -65,18 +65,18 @@ public class MainServlet extends HttpServlet {
 
         double dailyAccrual1;
         double dailyAccrual2;
-        double dailyAccrual3;
-        double dailyAccrual4;
+        double dailyAccrual3=0;
+        double dailyAccrual4=0;
 
         double interest1;
         double interest2;
-        double interest3;
-        double interest4;
+        double interest3=0;
+        double interest4=0;
 
         double compoundedValue1;
         double compoundedValue2;
-        double compoundedValue3;
-        double compoundedValue4;
+        double compoundedValue3=0;
+        double compoundedValue4=0;
 
 
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
@@ -221,6 +221,22 @@ public class MainServlet extends HttpServlet {
 
 
 
+
+        //the 2nd year's calculation of Daily Accrual
+        dailyAccrual2 = ((productRate * compoundedValue1)/period2)/100;
+        dailyAccrual2 = Math.round(dailyAccrual2 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+        //the 2nd year's calculation of interest
+        interest2 = dailyAccrual2 * period2;
+        interest2 = Math.round(interest2 * 100d) / 100d; //rounds the value to two decimal places
+
+        //the 2nd year's calculation of compounded value
+        compoundedValue2 =  compoundedValue1 + interest2;
+        compoundedValue2 = Math.round(compoundedValue2 * 100d) / 100d; //rounds the value to two decimal places
+
+
+
+
         out.println("<h2><b>Calculations</b></h2>");
         out.println("<table class=\"cal\">");
         out.println("<tr>");
@@ -240,23 +256,23 @@ public class MainServlet extends HttpServlet {
         out.println("<tr>");
         out.println("<td class=\"cal-yy12\">" + date2Reversed + "</td>");
         out.println("<td class=\"cal-yy12\">" + period2 +"</td>");
-        out.println("<td class=\"cal-yy12\">Interest 2</td>");
-        out.println("<td class=\"cal-yy12\">Compounded 2</td>");
-        out.println("<td class=\"cal-yy12\">Accrual 2</td>");
+        out.println("<td class=\"cal-yy12\">" + interest2 + "</td>");
+        out.println("<td class=\"cal-yy12\">" + compoundedValue2 + "</td>");
+        out.println("<td class=\"cal-yy12\">" + dailyAccrual2 + "</td>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td class=\"cal-yy12\">" + date3Reversed + "</td>");
         out.println("<td class=\"cal-yy12\">" + period3 + "</td>");
-        out.println("<td class=\"cal-yy12\">Interest 3</td>");
-        out.println("<td class=\"cal-yy12\">Compounded 3</td>");
-        out.println("<td class=\"cal-yy12\">Accrual 3</td>");
+        out.println("<td class=\"cal-yy12\">" + interest3 + "</td>");
+        out.println("<td class=\"cal-yy12\">" + compoundedValue3 + "</td>");
+        out.println("<td class=\"cal-yy12\">" + dailyAccrual3 + "</td>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td class=\"cal-yy12\">" + date4Reversed + "</td>");
-        out.println("<td class=\"cal-yy12\">"+ period4 +"</td>");
-        out.println("<td class=\"cal-yy12\">Interest 4</td>");
-        out.println("<td class=\"cal-yy12\">Compounded 4</td>");
-        out.println("<td class=\"cal-yy12\">Accrual 4</td>");
+        out.println("<td class=\"cal-yy12\">" + period4 + "</td>");
+        out.println("<td class=\"cal-yy12\">" + interest4 + "</td>");
+        out.println("<td class=\"cal-yy12\">" + compoundedValue4 + "</td>");
+        out.println("<td class=\"cal-yy12\">" + dailyAccrual4 + "</td>");
         out.println("<tr>");
         out.println("</table>");
         out.println("<br/>");
