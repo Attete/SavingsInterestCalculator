@@ -171,6 +171,9 @@ public class MainServlet extends HttpServlet {
         out.println("</table>");
         out.println("<br/><br/>");
 
+
+
+////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
         //Daily Accrual calculation for the 1st year, where leap year is taken into account
         //..if the productLaunchDate OR date1' fall on a leap year
         if(productLaunchDate.isLeapYear() || date1.isLeapYear())  {
@@ -204,8 +207,20 @@ public class MainServlet extends HttpServlet {
             periodIsLeap = 365;
         }
 
+        //the 1st year's calculation of Daily Accrual
+        dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
+        dailyAccrual1 = Math.round(dailyAccrual1 * 1000000d) / 1000000d; //rounds the value to six decimal places
 
-////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
+        //the 1st year's calculation of interest
+        interest1 = dailyAccrual1 * period1;
+        interest1 = Math.round(interest1 * 100d) / 100d; //rounds the value to two decimal places
+
+        //the 1st year's calculation of compounded value
+        compoundedValue1 =  depositValue + interest1;
+        compoundedValue1 = Math.round(compoundedValue1 * 100d) / 100d; //rounds the value to two decimal places
+
+
+
         out.println("<h2><b>Calculations</b></h2>");
         out.println("<table class=\"cal\">");
         out.println("<tr>");
@@ -218,9 +233,9 @@ public class MainServlet extends HttpServlet {
         out.println("<tr>");
         out.println("<td class=\"cal-zz12\">" + date1Reversed + "</td>");
         out.println("<td class=\"cal-zz12\">" + period1 + "</td>");
-        out.println("<td class=\"cal-zz12\">Interest 1</td>");
-        out.println("<td class=\"cal-zz12\">Compounded 1</td>");
-        out.println("<td class=\"cal-zz12\">Accrual 1</td>");
+        out.println("<td class=\"cal-zz12\">" + interest1 + "</td>");
+        out.println("<td class=\"cal-zz12\">" + compoundedValue1 + "</td>");
+        out.println("<td class=\"cal-zz12\">" + dailyAccrual1 + "</td>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td class=\"cal-yy12\">" + date2Reversed + "</td>");
