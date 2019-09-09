@@ -40,12 +40,21 @@
 </style>
 
     <script>
-        function isDateEmpty(aDate){
-             if(aDate.value == "") {
+        function leftEmpty(){
+            if(date2.value == ""){
 
-                 aDate.value = "1900-01-01";
+                date2.value = "1900-01-01";
+                date3.value = "1900-01-01";
+                date4.value = "1900-01-01";
+            }
+            else if (date3.value == "") {
+                date3.value = "1900-01-01";
+                date4.value = "1900-01-01";
+            } else if (date4.value == ""){
+                date4.value = "1900-01-01";
             }
         }
+
     </script>
 
 </head>
@@ -133,7 +142,11 @@
     </table>
    <br/>
 
-    <input type="submit" onclick="isDateEmpty(date2), isDateEmpty(date3), isDateEmpty(date4)" value="Calculate" id="calculate"/>
+
+
+
+    <input type="submit"
+           onclick="leftEmpty()" value="Calculate" id="calculate"/>
 
 
     <br/><br/>
