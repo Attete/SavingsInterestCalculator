@@ -237,6 +237,21 @@ public class MainServlet extends HttpServlet {
 
 
 
+        //the 3rd year's calculation of Daily Accrual
+        dailyAccrual3 = ((productRate * compoundedValue2)/period3)/100;
+        dailyAccrual3 = Math.round(dailyAccrual3 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+        //the 3rd year's calculation of interest
+        interest3 = dailyAccrual3 * period3;
+        interest3 = Math.round(interest3 * 100d) / 100d; //rounds the value to two decimal places
+
+        //the 3rd year's calculation of compounded value
+        compoundedValue3 =  compoundedValue2 + interest3;
+        compoundedValue3 = Math.round(compoundedValue3 * 100d) / 100d; //rounds the value to two decimal places
+
+
+
+
         out.println("<h2><b>Calculations</b></h2>");
         out.println("<table class=\"cal\">");
         out.println("<tr>");
