@@ -46,12 +46,22 @@
                 date2.value = "1900-01-01";
                 date3.value = "1900-01-01";
                 date4.value = "1900-01-01";
+
+                ProductEndDate.value = date1.value; //enforces consistency between two dates indicating the same Product End Date
+
+
             }
             else if (date3.value == "") {
                 date3.value = "1900-01-01";
                 date4.value = "1900-01-01";
+
+                ProductEndDate.value = date2.value; //enforces consistency between two dates indicating the same Product End Date
+
             } else if (date4.value == ""){
                 date4.value = "1900-01-01";
+
+                ProductEndDate.value = date3.value; //enforces consistency between two dates indicating the same Product End Date
+
             }
         }
 

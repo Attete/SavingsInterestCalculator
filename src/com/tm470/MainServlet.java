@@ -66,20 +66,11 @@ public class MainServlet extends HttpServlet {
 
         long periodIsLeap = 0;//to calculate if there is an additional day in a leap year
 
-        double dailyAccrual1 = 0.0;
-        double dailyAccrual2 = 0.0;
-        double dailyAccrual3 = 0.0;
-        double dailyAccrual4 = 0.0;
+        double dailyAccrual1 = 0.0, dailyAccrual2 = 0.0, dailyAccrual3 = 0.0, dailyAccrual4 = 0.0;
 
-        double interest1 = 0.0;
-        double interest2 = 0.0;
-        double interest3 = 0.0;
-        double interest4 = 0.0;
+        double interest1 = 0.0, interest2 = 0.0, interest3 = 0.0, interest4 = 0.0;
 
-        double compoundedValue1 = 0.0;
-        double compoundedValue2 = 0.0;
-        double compoundedValue3 = 0.0;
-        double compoundedValue4 = 0.0;
+        double compoundedValue1 = 0.0, compoundedValue2 = 0.0, compoundedValue3 = 0.0, compoundedValue4 = 0.0;
 
         double totalInterest = 0.0, balAtMaturity = 0.0;
 
