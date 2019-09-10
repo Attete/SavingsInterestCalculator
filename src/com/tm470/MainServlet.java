@@ -66,20 +66,20 @@ public class MainServlet extends HttpServlet {
 
         long periodIsLeap = 0;//to calculate if there is an additional day in a leap year
 
-        double dailyAccrual1;
-        double dailyAccrual2;
-        double dailyAccrual3;
-        double dailyAccrual4;
+        double dailyAccrual1 = 0.0;
+        double dailyAccrual2 = 0.0;
+        double dailyAccrual3 = 0.0;
+        double dailyAccrual4 = 0.0;
 
-        double interest1;
-        double interest2;
-        double interest3;
-        double interest4;
+        double interest1 = 0.0;
+        double interest2 = 0.0;
+        double interest3 = 0.0;
+        double interest4 = 0.0;
 
-        double compoundedValue1;
-        double compoundedValue2;
-        double compoundedValue3;
-        double compoundedValue4;
+        double compoundedValue1 = 0.0;
+        double compoundedValue2 = 0.0;
+        double compoundedValue3 = 0.0;
+        double compoundedValue4 = 0.0;
 
 
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
@@ -89,88 +89,6 @@ public class MainServlet extends HttpServlet {
         date2 = LocalDate.parse(req.getParameter("date2"));//Capitalisation date2 from 'Calculations' table in index.html
         date3 = LocalDate.parse(req.getParameter("date3"));//Capitalisation date3 from 'Calculations' table in index.html
         date4 = LocalDate.parse(req.getParameter("date4"));//Capitalisation date4 from 'Calculations' table in index.html
-
-
-
-        if( //if all dates are provided..
-                !(date1.isEqual(LocalDate.parse("1900-01-01")))
-                        && !(date2.isEqual(LocalDate.parse("1900-01-01")))
-                        && !(date3.isEqual(LocalDate.parse("1900-01-01")))
-                        && !(date4.isEqual(LocalDate.parse("1900-01-01")))){
-
-            //compares the days difference between the date stored in productLaunchDate
-            //and the date stored in date1 +1 as required for the 1st year of savings
-            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
-
-            //compares the days difference between the date stored in date1
-            //and the date stored in date2
-            period2 = ChronoUnit.DAYS.between(date1, date2);
-
-            //compares the days difference between the date stored in date2
-            //and the date stored in date3
-            period3 = ChronoUnit.DAYS.between(date2, date3);
-
-            //compares the days difference between the date stored in date3
-            //and the date stored in date4
-            period4 = ChronoUnit.DAYS.between(date3, date4);
-        }
-
-        if( //if date1 is provided and other is missing ..
-                !(date1.isEqual(LocalDate.parse("1900-01-01")))
-                        &&
-                        ( (date2.isEqual(LocalDate.parse("1900-01-01"))) ||
-                                (date3.isEqual(LocalDate.parse("1900-01-01"))) ||
-                                (date4.isEqual(LocalDate.parse("1900-01-01"))))){
-
-
-            //compares the days difference between the date stored in productLaunchDate
-            //and the date stored in date1 +1 as required for the 1st year of savings
-            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
-
-            period2 = 0;
-            period3 = 0;
-            period4 = 0;
-
-
-
-        }
-
-        if( //if date1 and date2 are provided and other is missing ..
-                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))))
-                        && ( (date3.isEqual(LocalDate.parse("1900-01-01"))) || (date4.isEqual(LocalDate.parse("1900-01-01"))))) {
-
-            //compares the days difference between the date stored in productLaunchDate
-            //and the date stored in date1 +1 as required for the 1st year of savings
-            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
-
-            //compares the days difference between the date stored in date1
-            //and the date stored in date2
-            period2 = ChronoUnit.DAYS.between(date1, date2);
-
-            period3 = 0;
-            period4 = 0;
-
-        }
-
-
-        if( //if date1,date2 and date3 are provided, but date4 is missing ..
-                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))) && !(date3.isEqual(LocalDate.parse("1900-01-01"))))
-                        &&  (date4.isEqual(LocalDate.parse("1900-01-01")))) {
-
-            //compares the days difference between the date stored in productLaunchDate
-            //and the date stored in date1 +1 as required for the 1st year of savings
-            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
-
-            //compares the days difference between the date stored in date1
-            //and the date stored in date2
-            period2 = ChronoUnit.DAYS.between(date1, date2);
-
-            //compares the days difference between the date stored in date2
-            //and the date stored in date3
-            period3 = ChronoUnit.DAYS.between(date2, date3);
-
-            period4 = 0;
-        }
 
 
         //Reversing ProductLaunchDate to display in dd/mm/yyyy format in Setup table
@@ -275,62 +193,223 @@ public class MainServlet extends HttpServlet {
             periodIsLeap = 365;
         }
 
-        //the 1st year's calculation of Daily Accrual
-        dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
-        dailyAccrual1 = Math.round(dailyAccrual1 * 1000000d) / 1000000d; //rounds the value to six decimal places
-
-        //the 1st year's calculation of interest
-        interest1 = dailyAccrual1 * period1;
-        interest1 = Math.round(interest1 * 100d) / 100d; //rounds the value to two decimal places
-
-        //the 1st year's calculation of compounded value
-        compoundedValue1 =  depositValue + interest1;
-        compoundedValue1 = Math.round(compoundedValue1 * 100d) / 100d; //rounds the value to two decimal places
 
 
 
+        if( //if all dates are provided..
+                !(date1.isEqual(LocalDate.parse("1900-01-01")))
+                        && !(date2.isEqual(LocalDate.parse("1900-01-01")))
+                        && !(date3.isEqual(LocalDate.parse("1900-01-01")))
+                        && !(date4.isEqual(LocalDate.parse("1900-01-01")))){
 
-        //the 2nd year's calculation of Daily Accrual
-        dailyAccrual2 = ((productRate * compoundedValue1)/period2)/100;
-        dailyAccrual2 = Math.round(dailyAccrual2 * 1000000d) / 1000000d; //rounds the value to six decimal places
+            //compares the days difference between the date stored in productLaunchDate
+            //and the date stored in date1 +1 as required for the 1st year of savings
+            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
 
-        //the 2nd year's calculation of interest
-        interest2 = dailyAccrual2 * period2;
-        interest2 = Math.round(interest2 * 100d) / 100d; //rounds the value to two decimal places
+            //compares the days difference between the date stored in date1
+            //and the date stored in date2
+            period2 = ChronoUnit.DAYS.between(date1, date2);
 
-        //the 2nd year's calculation of compounded value
-        compoundedValue2 =  compoundedValue1 + interest2;
-        compoundedValue2 = Math.round(compoundedValue2 * 100d) / 100d; //rounds the value to two decimal places
+            //compares the days difference between the date stored in date2
+            //and the date stored in date3
+            period3 = ChronoUnit.DAYS.between(date2, date3);
+
+            //compares the days difference between the date stored in date3
+            //and the date stored in date4
+            period4 = ChronoUnit.DAYS.between(date3, date4);
+
+            //the 1st year's calculation of Daily Accrual
+            dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
+            dailyAccrual1 = Math.round(dailyAccrual1 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 1st year's calculation of interest
+            interest1 = dailyAccrual1 * period1;
+            interest1 = Math.round(interest1 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 1st year's calculation of compounded value
+            compoundedValue1 =  depositValue + interest1;
+            compoundedValue1 = Math.round(compoundedValue1 * 100d) / 100d; //rounds the value to two decimal places
+
+
+            //the 2nd year's calculation of Daily Accrual
+            dailyAccrual2 = ((productRate * compoundedValue1)/period2)/100;
+            dailyAccrual2 = Math.round(dailyAccrual2 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 2nd year's calculation of interest
+            interest2 = dailyAccrual2 * period2;
+            interest2 = Math.round(interest2 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 2nd year's calculation of compounded value
+            compoundedValue2 =  compoundedValue1 + interest2;
+            compoundedValue2 = Math.round(compoundedValue2 * 100d) / 100d; //rounds the value to two decimal places
 
 
 
 
-        //the 3rd year's calculation of Daily Accrual
-        dailyAccrual3 = ((productRate * compoundedValue2)/period3)/100;
-        dailyAccrual3 = Math.round(dailyAccrual3 * 1000000d) / 1000000d; //rounds the value to six decimal places
+            //the 3rd year's calculation of Daily Accrual
+            dailyAccrual3 = ((productRate * compoundedValue2)/period3)/100;
+            dailyAccrual3 = Math.round(dailyAccrual3 * 1000000d) / 1000000d; //rounds the value to six decimal places
 
-        //the 3rd year's calculation of interest
-        interest3 = dailyAccrual3 * period3;
-        interest3 = Math.round(interest3 * 100d) / 100d; //rounds the value to two decimal places
+            //the 3rd year's calculation of interest
+            interest3 = dailyAccrual3 * period3;
+            interest3 = Math.round(interest3 * 100d) / 100d; //rounds the value to two decimal places
 
-        //the 3rd year's calculation of compounded value
-        compoundedValue3 =  compoundedValue2 + interest3;
-        compoundedValue3 = Math.round(compoundedValue3 * 100d) / 100d; //rounds the value to two decimal places
-
-
+            //the 3rd year's calculation of compounded value
+            compoundedValue3 =  compoundedValue2 + interest3;
+            compoundedValue3 = Math.round(compoundedValue3 * 100d) / 100d; //rounds the value to two decimal places
 
 
-        //the 4th year's calculation of Daily Accrual
-        dailyAccrual4 = ((productRate * compoundedValue3)/period4)/100;
-        dailyAccrual4 = Math.round(dailyAccrual4 * 1000000d) / 1000000d; //rounds the value to six decimal places
 
-        //the 4th year's calculation of interest
-        interest4 = dailyAccrual4 * period4;
-        interest4 = Math.round(interest4 * 100d) / 100d; //rounds the value to two decimal places
 
-        //the 4th year's calculation of compounded value
-        compoundedValue4 =  compoundedValue3 + interest4;
-        compoundedValue4 = Math.round(compoundedValue4 * 100d) / 100d; //rounds the value to two decimal places
+            //the 4th year's calculation of Daily Accrual
+            dailyAccrual4 = ((productRate * compoundedValue3)/period4)/100;
+            dailyAccrual4 = Math.round(dailyAccrual4 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 4th year's calculation of interest
+            interest4 = dailyAccrual4 * period4;
+            interest4 = Math.round(interest4 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 4th year's calculation of compounded value
+            compoundedValue4 =  compoundedValue3 + interest4;
+            compoundedValue4 = Math.round(compoundedValue4 * 100d) / 100d; //rounds the value to two decimal places
+
+        }
+
+        if( //if date1 is provided and other is missing ..
+                !(date1.isEqual(LocalDate.parse("1900-01-01")))
+                        &&
+                        ( (date2.isEqual(LocalDate.parse("1900-01-01"))) ||
+                                (date3.isEqual(LocalDate.parse("1900-01-01"))) ||
+                                (date4.isEqual(LocalDate.parse("1900-01-01"))))){
+
+
+            //compares the days difference between the date stored in productLaunchDate
+            //and the date stored in date1 +1 as required for the 1st year of savings
+            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
+
+            period2 = 0;
+            period3 = 0;
+            period4 = 0;
+
+            //the 1st year's calculation of Daily Accrual
+            dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
+            dailyAccrual1 = Math.round(dailyAccrual1 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 1st year's calculation of interest
+            interest1 = dailyAccrual1 * period1;
+            interest1 = Math.round(interest1 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 1st year's calculation of compounded value
+            compoundedValue1 =  depositValue + interest1;
+            compoundedValue1 = Math.round(compoundedValue1 * 100d) / 100d; //rounds the value to two decimal places
+
+
+
+        }
+
+        if( //if date1 and date2 are provided and other is missing ..
+                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))))
+                        && ( (date3.isEqual(LocalDate.parse("1900-01-01"))) || (date4.isEqual(LocalDate.parse("1900-01-01"))))) {
+
+            //compares the days difference between the date stored in productLaunchDate
+            //and the date stored in date1 +1 as required for the 1st year of savings
+            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
+
+            //compares the days difference between the date stored in date1
+            //and the date stored in date2
+            period2 = ChronoUnit.DAYS.between(date1, date2);
+
+            period3 = 0;
+            period4 = 0;
+
+            //the 1st year's calculation of Daily Accrual
+            dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
+            dailyAccrual1 = Math.round(dailyAccrual1 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 1st year's calculation of interest
+            interest1 = dailyAccrual1 * period1;
+            interest1 = Math.round(interest1 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 1st year's calculation of compounded value
+            compoundedValue1 =  depositValue + interest1;
+            compoundedValue1 = Math.round(compoundedValue1 * 100d) / 100d; //rounds the value to two decimal places
+
+
+            //the 2nd year's calculation of Daily Accrual
+            dailyAccrual2 = ((productRate * compoundedValue1)/period2)/100;
+            dailyAccrual2 = Math.round(dailyAccrual2 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 2nd year's calculation of interest
+            interest2 = dailyAccrual2 * period2;
+            interest2 = Math.round(interest2 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 2nd year's calculation of compounded value
+            compoundedValue2 =  compoundedValue1 + interest2;
+            compoundedValue2 = Math.round(compoundedValue2 * 100d) / 100d; //rounds the value to two decimal places
+
+
+
+        }
+
+
+        if( //if date1,date2 and date3 are provided, but date4 is missing ..
+                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))) && !(date3.isEqual(LocalDate.parse("1900-01-01"))))
+                        &&  (date4.isEqual(LocalDate.parse("1900-01-01")))) {
+
+            //compares the days difference between the date stored in productLaunchDate
+            //and the date stored in date1 +1 as required for the 1st year of savings
+            period1 = (ChronoUnit.DAYS.between(productLaunchDate, date1))+1;
+
+            //compares the days difference between the date stored in date1
+            //and the date stored in date2
+            period2 = ChronoUnit.DAYS.between(date1, date2);
+
+            //compares the days difference between the date stored in date2
+            //and the date stored in date3
+            period3 = ChronoUnit.DAYS.between(date2, date3);
+
+            period4 = 0;
+
+            //the 1st year's calculation of Daily Accrual
+            dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
+            dailyAccrual1 = Math.round(dailyAccrual1 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 1st year's calculation of interest
+            interest1 = dailyAccrual1 * period1;
+            interest1 = Math.round(interest1 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 1st year's calculation of compounded value
+            compoundedValue1 =  depositValue + interest1;
+            compoundedValue1 = Math.round(compoundedValue1 * 100d) / 100d; //rounds the value to two decimal places
+
+
+            //the 2nd year's calculation of Daily Accrual
+            dailyAccrual2 = ((productRate * compoundedValue1)/period2)/100;
+            dailyAccrual2 = Math.round(dailyAccrual2 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 2nd year's calculation of interest
+            interest2 = dailyAccrual2 * period2;
+            interest2 = Math.round(interest2 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 2nd year's calculation of compounded value
+            compoundedValue2 =  compoundedValue1 + interest2;
+            compoundedValue2 = Math.round(compoundedValue2 * 100d) / 100d; //rounds the value to two decimal places
+
+
+            //the 3rd year's calculation of Daily Accrual
+            dailyAccrual3 = ((productRate * compoundedValue2)/period3)/100;
+            dailyAccrual3 = Math.round(dailyAccrual3 * 1000000d) / 1000000d; //rounds the value to six decimal places
+
+            //the 3rd year's calculation of interest
+            interest3 = dailyAccrual3 * period3;
+            interest3 = Math.round(interest3 * 100d) / 100d; //rounds the value to two decimal places
+
+            //the 3rd year's calculation of compounded value
+            compoundedValue3 =  compoundedValue2 + interest3;
+            compoundedValue3 = Math.round(compoundedValue3 * 100d) / 100d; //rounds the value to two decimal places
+
+        }
+
 
 
         out.println("<h2><b>Calculations</b></h2>");
