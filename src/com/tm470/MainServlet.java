@@ -81,6 +81,8 @@ public class MainServlet extends HttpServlet {
         double compoundedValue3 = 0.0;
         double compoundedValue4 = 0.0;
 
+        double totalInterest = 0.0, balAtMaturity = 0.0;
+
 
         productLaunchDate = LocalDate.parse(req.getParameter("ProductLaunchDate"));//storing the productLaunchDate from index.html
         productEndDate = LocalDate.parse(req.getParameter("ProductEndDate"));//storing the productEndDate from index.html
@@ -277,6 +279,18 @@ public class MainServlet extends HttpServlet {
             compoundedValue4 =  compoundedValue3 + interest4;
             compoundedValue4 = Math.round(compoundedValue4 * 100d) / 100d; //rounds the value to two decimal places
 
+
+
+            //calculates 'Total Interest' for the 'Calculations' pane
+            totalInterest = interest1 + interest2 + interest3 + interest4;
+            totalInterest = Math.round(totalInterest * 100d) / 100d; //rounds the value to two decimal places
+
+            //calculates 'Balance at Maturity' for the 'Calculations' pane
+            balAtMaturity = depositValue + totalInterest;
+            balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
+
+
+
         }
 
         if( //if date1 is provided and other is missing ..
@@ -309,6 +323,15 @@ public class MainServlet extends HttpServlet {
             //the 1st year's calculation of compounded value
             compoundedValue1 =  depositValue + interest1;
             compoundedValue1 = Math.round(compoundedValue1 * 100d) / 100d; //rounds the value to two decimal places
+
+
+            //calculates 'Total Interest' for the 'Calculations' pane
+            totalInterest = interest1;
+            totalInterest = Math.round(totalInterest * 100d) / 100d; //rounds the value to two decimal places
+
+            //calculates 'Balance at Maturity' for the 'Calculations' pane
+            balAtMaturity = depositValue + totalInterest;
+            balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
 
 
 
@@ -357,6 +380,15 @@ public class MainServlet extends HttpServlet {
             //the 2nd year's calculation of compounded value
             compoundedValue2 =  compoundedValue1 + interest2;
             compoundedValue2 = Math.round(compoundedValue2 * 100d) / 100d; //rounds the value to two decimal places
+
+
+            //calculates 'Total Interest' for the 'Calculations' pane
+            totalInterest = interest1 + interest2;
+            totalInterest = Math.round(totalInterest * 100d) / 100d; //rounds the value to two decimal places
+
+            //calculates 'Balance at Maturity' for the 'Calculations' pane
+            balAtMaturity = depositValue + totalInterest;
+            balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
 
 
 
@@ -423,6 +455,14 @@ public class MainServlet extends HttpServlet {
             compoundedValue3 =  compoundedValue2 + interest3;
             compoundedValue3 = Math.round(compoundedValue3 * 100d) / 100d; //rounds the value to two decimal places
 
+
+            //calculates 'Total Interest' for the 'Calculations' pane
+            totalInterest = interest1 + interest2 + interest3;
+            totalInterest = Math.round(totalInterest * 100d) / 100d; //rounds the value to two decimal places
+
+            //calculates 'Balance at Maturity' for the 'Calculations' pane
+            balAtMaturity = depositValue + totalInterest;
+            balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
         }
 
 
@@ -481,8 +521,8 @@ public class MainServlet extends HttpServlet {
         out.println("</tr>");
         out.println("<tr>");
         out.println("<td class=\"sum-zz12\">" + numberOfMonths + "</td>");
-        out.println("<td class=\"sum-yy12\">ab2</td>");
-        out.println("<td class=\"sum-yy12\">ab3</td>");
+        out.println("<td class=\"sum-yy12\">" + totalInterest + "</td>");
+        out.println("<td class=\"sum-yy12\">" + balAtMaturity + " </td>");
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/>");
