@@ -218,6 +218,10 @@ public class MainServlet extends HttpServlet {
             //and the date stored in date4
             period4 = ChronoUnit.DAYS.between(date3, date4);
 
+            //increases number of months for the 'Months' output in 'Summary' pane
+            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date4));
+
+
             //the 1st year's calculation of Daily Accrual
             dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
             dailyAccrual1 = Math.round(dailyAccrual1 * 1000000d) / 1000000d; //rounds the value to six decimal places
@@ -291,6 +295,9 @@ public class MainServlet extends HttpServlet {
             period3 = 0;
             period4 = 0;
 
+            //increases number of months for the 'Months' output in 'Summary' pane
+            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date1));
+
             //the 1st year's calculation of Daily Accrual
             dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
             dailyAccrual1 = Math.round(dailyAccrual1 * 1000000d) / 1000000d; //rounds the value to six decimal places
@@ -321,6 +328,10 @@ public class MainServlet extends HttpServlet {
 
             period3 = 0;
             period4 = 0;
+
+
+            //increases number of months for the 'Months' output in 'Summary' pane
+            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date2));
 
             //the 1st year's calculation of Daily Accrual
             dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
@@ -369,6 +380,10 @@ public class MainServlet extends HttpServlet {
             period3 = ChronoUnit.DAYS.between(date2, date3);
 
             period4 = 0;
+
+
+            //increases number of months for the 'Months' output in 'Summary' pane
+            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date3));
 
             //the 1st year's calculation of Daily Accrual
             dailyAccrual1 = ((productRate * depositValue)/periodIsLeap)/100;
@@ -454,45 +469,6 @@ public class MainServlet extends HttpServlet {
 
 
 ////////////////// SUMMARY TABLE //////////////////////////////////////////////
-
-
-
-        //increases number of months for the 'Months' output in 'Summary' pane
-
-        if( //if all dates are provided..
-                !(date1.isEqual(LocalDate.parse("1900-01-01")))
-         && !(date2.isEqual(LocalDate.parse("1900-01-01")))
-         && !(date3.isEqual(LocalDate.parse("1900-01-01")))
-         && !(date4.isEqual(LocalDate.parse("1900-01-01")))){
-
-            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date4));
-         }
-
-        if( //if date1 is provided and any other is missing ..
-                !(date1.isEqual(LocalDate.parse("1900-01-01")))
-                &&
-                    ( (date2.isEqual(LocalDate.parse("1900-01-01"))) ||
-                      (date3.isEqual(LocalDate.parse("1900-01-01"))) ||
-                      (date4.isEqual(LocalDate.parse("1900-01-01"))))){
-
-            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date1));
-          }
-
-        if( //if date1 and date2 are provided and any other is missing ..
-                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))))
-                    && ( (date3.isEqual(LocalDate.parse("1900-01-01"))) || (date4.isEqual(LocalDate.parse("1900-01-01"))))) {
-
-            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date2));
-        }
-
-
-        if( //if date1,date2 and date3 are provided, but date4 is missing ..
-                ( !(date1.isEqual(LocalDate.parse("1900-01-01"))) && !(date2.isEqual(LocalDate.parse("1900-01-01"))) && !(date3.isEqual(LocalDate.parse("1900-01-01"))))
-                        &&  (date4.isEqual(LocalDate.parse("1900-01-01")))) {
-
-            numberOfMonths = (int) (ChronoUnit.MONTHS.between(productLaunchDate, date3));
-        }
-
 
 
 
