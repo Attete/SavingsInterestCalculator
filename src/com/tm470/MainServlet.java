@@ -11,6 +11,15 @@ import java.time.Month;
 import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
 
+
+
+
+
+
+
+
+
+
 @WebServlet(name = "MainServlet", urlPatterns = {"/processMainServlet"})
 
 
@@ -27,12 +36,13 @@ public class MainServlet extends HttpServlet {
         out.println("<!DOCTYPE html>");
         out.println("<html><head>");
         out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />");
+        out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css\">");
         out.println("<title>SIC Result</title>");
         out.println("<style>body { font-family: Arial, sans-serif; font-size: 14px}</style>");
         out.println("<style type=\"text/css\">");
 
         /// Style for Calculations table ///////////////
-        out.println("<style>.cal  {border-collapse:collapse;border-spacing:0;}</style>");
+        out.println("<style>.cal  {border-collapse:collapse;border-spacing:0;} .addBorder{ border-color:black !important}</style>");
         out.println("<style>.cal td{padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");//font-weight:normal;
         out.println("<style>.cal th{font-weight:bold;padding:6px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}</style>");
         out.println("<style>.cal .cal-xx12{text-align:left}</style>");
@@ -50,15 +60,25 @@ public class MainServlet extends HttpServlet {
 
         out.println("<body>");
 
+        out.println("<br><div class='container'>");
+        out.println("<div class='row'>");
+        out.println("<div class='col-lg-12 col-md-12 col-sm-12'>");
+        out.println("<div style='float:right'> ");
         out.println("<a href=\"help.html\" target=\"_blank\">Help</a>");
         out.println("<a href=\"documentation.html\" target=\"_blank\">Documentation</a>");
         out.println("<a href=\"about.html\" target=\"_blank\">About</a>");
+        out.println("</div>");
+        out.println("</div>");
+        out.println("</div>");
+        out.println("</div>");
 
         LocalDate productLaunchDate, productEndDate;//Setup dates
         double productRate= 0.0, depositValue = 0.0,  monthlyRate;//setup values
         depositValue = Double.parseDouble(req.getParameter("DepositValue"));
 
         int numberOfMonths = 0; //counts number of months from productLaunchDate to last capitalisation date 'date2', 'date3', or 'date4'
+
+
 
         LocalDate date1, date2, date3, date4;// to store Capitalisation Dates from 'Calculations' table in index.html
 
@@ -133,25 +153,30 @@ public class MainServlet extends HttpServlet {
         monthlyRate = monthlyRate/100;
 
 
+        out.println("<div class='container'>");
+        out.println("<div class='row'>");
+        out.println("<div class='col-lg-12 col-md-12 col-sm-12'>");
         out.println("<h1>Savings Interest Calculator</h1>");
         out.println("<h2><b>Setup</b></h2>");
-        out.println("<table class=\"cal\">");
+        out.println("<table class=\" table table-hover cal\">");
         out.println("<tr>");
-        out.println("<th class=\"cal-xx12\">Product Launch Date :</th>");
-        out.println("<td class=\"cal-xx12\">" + productLaunchDateReversed + "</th> ");
-        out.println("<th class=\"cal-xx12\">Product Rate :</th>");
-        out.println("<td class=\"cal-xx12\">" + req.getParameter("ProductRate") + "</th>");
-        out.println("<th rowspan=\"2\" class=\"cal-xx12\"> Deposit Value : " + " " + depositValue + "</th>");
+        out.println("<th class=\"cal-xx12 addBorder\">Product Launch Date :</th>");
+        out.println("<td class=\"cal-xx12 addBorder\">" + productLaunchDateReversed + "</th> ");
+        out.println("<th class=\"cal-xx12 addBorder\">Product Rate :</th>");
+        out.println("<td class=\"cal-xx12 addBorder\">" + req.getParameter("ProductRate") + "</th>");
+        out.println("<th rowspan=\"2\" class=\"cal-xx12 addBorder\"> Deposit Value : " + " " + depositValue + "</th>");
         out.println("</tr>");
         out.println("<tr>");
         out.println("<th class=\"cal-xx12\">Product End Date :</td>");
-        out.println("<td class=\"cal-zz12\">" + productEndDateReversed + "</td>");
-        out.println("<th class=\"cal-zz12\">Monthly Rate :</td>");
-        out.println("<td class=\"cal-zz12\">" + monthlyRate + "</td>");
+        out.println("<td class=\"cal-zz12\" style='text-align : left !important'>" + productEndDateReversed + "</td>");
+        out.println("<th class=\"cal-zz12\" style='text-align : left !important'>Monthly Rate :</td>");
+        out.println("<td class=\"cal-zz12\" style='text-align : left !important'>" + monthlyRate + "</td>");
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/><br/>");
-
+        out.println("</div>");
+        out.println("</div>");
+        out.println("</div>");
 
 
 ////////////////// CALCULATIONS TABLE //////////////////////////////////////////////
@@ -193,19 +218,19 @@ public class MainServlet extends HttpServlet {
 
         if( //if all dates are provided, are in ascending order and Product End Date equals last Capitalisation Date (date4)
                 (  !(date1.isEqual(LocalDate.parse("1900-01-01"))) &&
-                   !(date2.isEqual(LocalDate.parse("1900-01-01"))) &&
-                   !(date3.isEqual(LocalDate.parse("1900-01-01"))) &&
-                   !(date4.isEqual(LocalDate.parse("1900-01-01")))
+                        !(date2.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        !(date3.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        !(date4.isEqual(LocalDate.parse("1900-01-01")))
                 )
-               &&
-                (
-                        (date1.isAfter(productLaunchDate)) &&
-                        (date2.isAfter(date1)) &&
-                        (date3.isAfter(date2)) &&
-                        (date4.isAfter(date3)) &&
-                        (productLaunchDate.isBefore(productEndDate)) &&
-                        (date4.isEqual(productEndDate))
-                )
+                        &&
+                        (
+                                (date1.isAfter(productLaunchDate)) &&
+                                        (date2.isAfter(date1)) &&
+                                        (date3.isAfter(date2)) &&
+                                        (date4.isAfter(date3)) &&
+                                        (productLaunchDate.isBefore(productEndDate)) &&
+                                        (date4.isEqual(productEndDate))
+                        )
 
 
         ){
@@ -295,7 +320,7 @@ public class MainServlet extends HttpServlet {
             balAtMaturity = depositValue + totalInterest;
             balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
 
-    }else if( //if only date1 is provided, equals Product End Date and is larger than Product Launch Date
+        }else if( //if only date1 is provided, equals Product End Date and is larger than Product Launch Date
                 (  !(date1.isEqual(LocalDate.parse("1900-01-01"))) &&
                         (date2.isEqual(LocalDate.parse("1900-01-01"))) &&
                         (date3.isEqual(LocalDate.parse("1900-01-01"))) &&
@@ -303,10 +328,10 @@ public class MainServlet extends HttpServlet {
                 )
                         &&
                         (
-                          (date1.isAfter(productLaunchDate))  &&
-                          (productLaunchDate.isBefore(productEndDate))  &&
-                          (date1.isEqual(productEndDate))
-                       )
+                                (date1.isAfter(productLaunchDate))  &&
+                                        (productLaunchDate.isBefore(productEndDate))  &&
+                                        (date1.isEqual(productEndDate))
+                        )
 
 
         )
@@ -497,77 +522,91 @@ public class MainServlet extends HttpServlet {
             balAtMaturity = depositValue + totalInterest;
             balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
         }else {
-           dateerror = " - Error - Go back and correct dates";
+            dateerror = " - Error - Go back and correct dates";
         }
 
 
-
-
-
+        out.println("<div class='container'>");
+        out.println("<div class='row'>");
+        out.println("<div class='col-lg-12 col-md-12 col-sm-12'>");
         out.println("<h2><b>Calculations" + dateerror + "</b></h2>");
-        out.println("<table class=\"cal\">");
+        out.println("<table class=\"table table-hover cal\">");
         out.println("<tr>");
-        out.println("<th class=\"cal-xx12\">Capitalisation Dates</th>");
-        out.println("<th class=\"cal-xx12\">Days</th> ");
-        out.println("<th class=\"cal-xx12\">Interest</th>");
-        out.println("<th class=\"cal-xx12\">Compounded Value</th>");
-        out.println("<th class=\"cal-xx12\">Daily Accrual</th>");
+        out.println("<th class=\"cal-xx12 addBorder\" style='text-align : left !important'>Capitalisation Dates</th>");
+        out.println("<th class=\"cal-xx12 addBorder\" style='text-align:left !important'>Days</th> ");
+        out.println("<th class=\"cal-xx12 addBorder\" style='text-align :left !important'>Interest</th>");
+        out.println("<th class=\"cal-xx12 addBorder\" style='text-align :left !important'>Compounded Value</th>");
+        out.println("<th class=\"cal-xx12 addBorder\" style='text-align:left !important'>Daily Accrual</th>");
         out.println("</tr>");
         out.println("<tr>");
-        out.println("<td class=\"cal-zz12\">" + date1Reversed + "</td>");
-        out.println("<td class=\"cal-zz12\">" + period1 + "</td>");
-        out.println("<td class=\"cal-zz12\">" + interest1 + "</td>");
-        out.println("<td class=\"cal-zz12\">" + compoundedValue1 + "</td>");
-        out.println("<td class=\"cal-zz12\">" + dailyAccrual1 + "</td>");
+        out.println("<td class=\"cal-zz12\" style='text-align:left !important'>" + date1Reversed + "</td>");
+        out.println("<td class=\"cal-zz12\" style='text-align:left !important'>" + period1 + "</td>");
+        out.println("<td class=\"cal-zz12\" style='text-align:left !important'>" + interest1 + "</td>");
+        out.println("<td class=\"cal-zz12\" style='text-align:left !important'>" + compoundedValue1 + "</td>");
+        out.println("<td class=\"cal-zz12\" style='text-align:left !important'>" + dailyAccrual1 + "</td>");
         out.println("</tr>");
         out.println("<tr>");
-        out.println("<td class=\"cal-yy12\">" + date2Reversed + "</td>");
-        out.println("<td class=\"cal-yy12\">" + period2 +"</td>");
-        out.println("<td class=\"cal-yy12\">" + interest2 + "</td>");
-        out.println("<td class=\"cal-yy12\">" + compoundedValue2 + "</td>");
-        out.println("<td class=\"cal-yy12\">" + dailyAccrual2 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + date2Reversed + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + period2 +"</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + interest2 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + compoundedValue2 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + dailyAccrual2 + "</td>");
         out.println("</tr>");
         out.println("<tr>");
-        out.println("<td class=\"cal-yy12\">" + date3Reversed + "</td>");
-        out.println("<td class=\"cal-yy12\">" + period3 + "</td>");
-        out.println("<td class=\"cal-yy12\">" + interest3 + "</td>");
-        out.println("<td class=\"cal-yy12\">" + compoundedValue3 + "</td>");
-        out.println("<td class=\"cal-yy12\">" + dailyAccrual3 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + date3Reversed + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + period3 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + interest3 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + compoundedValue3 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + dailyAccrual3 + "</td>");
         out.println("</tr>");
         out.println("<tr>");
-        out.println("<td class=\"cal-yy12\">" + date4Reversed + "</td>");
-        out.println("<td class=\"cal-yy12\">" + period4 + "</td>");
-        out.println("<td class=\"cal-yy12\">" + interest4 + "</td>");
-        out.println("<td class=\"cal-yy12\">" + compoundedValue4 + "</td>");
-        out.println("<td class=\"cal-yy12\">" + dailyAccrual4 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + date4Reversed + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + period4 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + interest4 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + compoundedValue4 + "</td>");
+        out.println("<td class=\"cal-yy12\" style='text-align:left !important'>" + dailyAccrual4 + "</td>");
         out.println("<tr>");
         out.println("</table>");
         out.println("<br/>");
+        out.println("</div>");
+        out.println("</div>");
+        out.println("</div>");
+
 
 
 ////////////////// SUMMARY TABLE //////////////////////////////////////////////
-
-
-
+        out.println("<div class='container'>");
+        out.println("<div class='row'>");
+        out.println("<div class='col-lg-12 col-md-12 col-sm-12'>");
         out.println("<h2><b>Summary</b></h2>");
-        out.println("<table class=\"sum\">");
+        out.println("<table class=\"table table-hover sum\">");
         out.println("<tr>");
-        out.println("<th class=\"sum-xx12\">Months</th>");
-        out.println("<th class=\"sum-xx12\">Total Interest</th>");
-        out.println("<th class=\"sum-xx12\">Balance at Maturity</th>");
+        out.println("<th class=\"sum-xx12 addBorder\" style='text-align:left !important'>Months</th>");
+        out.println("<th class=\"sum-xx12 addBorder\" style='text-align:left !important'>Total Interest</th>");
+        out.println("<th class=\"sum-xx12 addBorder\" style='text-align:left !important'>Balance at Maturity</th>");
         out.println("</tr>");
         out.println("<tr>");
-        out.println("<td class=\"sum-zz12\">" + numberOfMonths + "</td>");
-        out.println("<td class=\"sum-yy12\">" + totalInterest + "</td>");
-        out.println("<td class=\"sum-yy12\">" + balAtMaturity + " </td>");
+        out.println("<td class=\"sum-zz12\"style='text-align:left !important'>" + numberOfMonths + "</td>");
+        out.println("<td class=\"sum-yy12\" style='text-align:left !important'>" + totalInterest + "</td>");
+        out.println("<td class=\"sum-yy12\"style='text-align:left !important'>" + balAtMaturity + " </td>");
         out.println("</tr>");
         out.println("</table>");
         out.println("<br/>");
+        out.println("</div>");
+        out.println("</div>");
+        out.println("</div>");
+
 
 
 ////////////////// Back button //////////////////////////////////////////////
-        out.println("<button style=\"width: 10em; height: 3em; background-color: lightblue; font-weight: ;" +
+        out.println("<div class='container'>");
+        out.println("<div class='row'>");
+        out.println("<div class='col-lg-12 col-md-12 col-sm-12'>");
+        out.println("<button class='btn btn-default btn-lg  btn-block' style=\"background-color: lightblue;" +
                 "font: caption; color: black;\" onclick=goBack() >Go Back</button>");
+        out.println("</div>");
+        out.println("</div>");
+        out.println("</div>");
         out.println("<script>");
         out.println("function goBack() { " +
                 "window.history.back() " +
@@ -577,7 +616,7 @@ public class MainServlet extends HttpServlet {
 
         out.println("</body></html>");
         out.close();
-    }
 
+    }
 
 }
