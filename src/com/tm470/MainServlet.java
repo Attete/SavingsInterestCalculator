@@ -65,7 +65,6 @@ public class MainServlet extends HttpServlet {
         out.println("<div class='col-lg-12 col-md-12 col-sm-12'>");
         out.println("<div style='float:right'> ");
         out.println("<a href=\"help.html\" target=\"_blank\">Help</a>");
-        out.println("<a href=\"documentation.html\" target=\"_blank\">Documentation</a>");
         out.println("<a href=\"about.html\" target=\"_blank\">About</a>");
         out.println("</div>");
         out.println("</div>");
