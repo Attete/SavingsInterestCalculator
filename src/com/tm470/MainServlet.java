@@ -8,16 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
-
-
-
-
-
-
-
-
 
 
 @WebServlet(name = "MainServlet", urlPatterns = {"/processMainServlet"})
