@@ -37,10 +37,11 @@
             font-weight: bold;
             background-color: palegoldenrod;
         }
-</style>
+    </style>
 
     <script>
         function leftEmpty(){
+
             if(date2.value == ""){
 
                 date2.value = "1900-01-01";
@@ -65,6 +66,8 @@
             }
         }
 
+
+
     </script>
 
 </head>
@@ -79,13 +82,13 @@
 
 
 <h1>Savings Interest Calculator</h1>
-  <form method="post" action="processMainServlet">
+<form method="post" action="processMainServlet">
 
-<!--     SETUP  -->
+    <!--     SETUP  -->
 
 
 
-<h2><b>Setup</b></h2>
+    <h2><b>Setup</b></h2>
 
 
     <table class="cal">
@@ -97,10 +100,10 @@
             <th class="cal-xx12" rowspan="2">Deposit Value :</th>
             <td rowspan="2"><input type="number" value="10000" id="DepositValue" name="DepositValue" step=".01" required/></td>
         </tr>
-      <tr>
+        <tr>
             <th class="cal-xx12">Product End Date :</th>
             <td><input type="date" value="2023-06-06" id="ProductEndDate" name="ProductEndDate" required/></td>
-      </tr>
+        </tr>
     </table>
 
 
@@ -109,10 +112,10 @@
 
 
 
-<!--     CALCULATIONS  -->
+    <!--     CALCULATIONS  -->
 
 
-<h2><b>Calculations</b></h2>
+    <h2><b>Calculations</b></h2>
     <table class="cal">
         <tr>
             <th class="cal-xx12">Capitalisation Dates</th>
@@ -128,7 +131,7 @@
             <td class="cal-zz12"></td>
             <td class="cal-zz12"></td>
         </tr>
-      <tr>
+        <tr>
             <td class="cal-yy12"><input type="date" value="2021-06-06" id="date2" name="date2"/></td>
             <td class="cal-yy12"></td>
             <td class="cal-yy12"></td>
@@ -150,7 +153,7 @@
             <td class="cal-yy12"></td>
         </tr>
     </table>
-   <br/>
+    <br/>
 
 
 
@@ -167,7 +170,7 @@
 
 
 
-  </form>
+</form>
 
 </body>
 </html>
