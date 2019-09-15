@@ -231,6 +231,14 @@ public class MainServlet extends HttpServlet {
                                         (productLaunchDate.isBefore(productEndDate)) &&
                                         (date4.isEqual(productEndDate))
                         )
+                        &&
+                        (
+                                (ChronoUnit.DAYS.between(productLaunchDate, date1)) <= 366 &&
+                                (ChronoUnit.DAYS.between(date1, date2)) <= 366 &&
+                                (ChronoUnit.DAYS.between(date2, date3)) <= 366 &&
+                                (ChronoUnit.DAYS.between(date3, date4)) <= 366
+
+                        )
 
 
         ){
@@ -332,7 +340,8 @@ public class MainServlet extends HttpServlet {
                                         (productLaunchDate.isBefore(productEndDate))  &&
                                         (date1.isEqual(productEndDate))
                         )
-
+                         &&
+                        (ChronoUnit.DAYS.between(productLaunchDate, date1)) <= 366
 
         )
 
@@ -382,8 +391,11 @@ public class MainServlet extends HttpServlet {
                                         (productLaunchDate.isBefore(productEndDate)) &&
                                         (date2.isEqual(productEndDate))
                         )
-
-
+                        &&
+                        (
+                                (ChronoUnit.DAYS.between(productLaunchDate, date1)) <= 366 &&
+                                (ChronoUnit.DAYS.between(date1, date2)) <= 366
+                        )
         )
 
         {
@@ -451,7 +463,14 @@ public class MainServlet extends HttpServlet {
                                         (productLaunchDate.isBefore(productEndDate)) &&
                                         (date3.isEqual(productEndDate))
                         )
+                        &&
+                        (
+                                (ChronoUnit.DAYS.between(productLaunchDate, date1)) <= 366 &&
+                                (ChronoUnit.DAYS.between(date1, date2)) <= 366 &&
+                                (ChronoUnit.DAYS.between(date2, date3)) <= 366
 
+
+                        )
 
         )
 
