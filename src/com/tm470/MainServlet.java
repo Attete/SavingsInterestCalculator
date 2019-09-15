@@ -295,15 +295,23 @@ public class MainServlet extends HttpServlet {
             balAtMaturity = depositValue + totalInterest;
             balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
 
-    }else if(//if only date1 is provided, is in larger than Product Launch Date and equals to last Capitalisation Date (date1)
-                (!(date1.isEqual(LocalDate.parse("1900-01-01"))) &&
-                        ( (date2.isEqual(LocalDate.parse("1900-01-01"))) ||
-                          (date3.isEqual(LocalDate.parse("1900-01-01"))) ||
-                          (date4.isEqual(LocalDate.parse("1900-01-01")))) )
-                       &&
-                       ((date1.isAfter(productLaunchDate)) &&
-                       (date1.isEqual(productEndDate)))
-        )  {
+    }else if( //if only date1 is provided, equals Product End Date and is larger than Product Launch Date
+                (  !(date1.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        (date2.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        (date3.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        (date4.isEqual(LocalDate.parse("1900-01-01")))
+                )
+                        &&
+                        (
+                          (date1.isAfter(productLaunchDate))  &&
+                          (productLaunchDate.isBefore(productEndDate))  &&
+                          (date1.isEqual(productEndDate))
+                       )
+
+
+        )
+
+        {
 
             //compares the days difference between the date stored in productLaunchDate
             //and the date stored in date1 +1 as required for the 1st year of savings
@@ -336,17 +344,21 @@ public class MainServlet extends HttpServlet {
             //calculates 'Balance at Maturity' for the 'Calculations' pane
             balAtMaturity = depositValue + totalInterest;
             balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
-        }else if(//if only date1 and date 2 are provided, are in ascending order and Product End Date equals last Capitalisation Date (date2)
-                (
-                        !(date1.isEqual(LocalDate.parse("1900-01-01")) && !(date2.isEqual(LocalDate.parse("1900-01-01"))) ) &&
-                         ((date3.isEqual(LocalDate.parse("1900-01-01"))) || (date4.isEqual(LocalDate.parse("1900-01-01"))))
+        }else if( //if only date1 and date2 are provided, are in ascending order and Product End Date equals last Capitalisation Date (date3)
+                (  !(date1.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        !(date2.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        (date3.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        (date4.isEqual(LocalDate.parse("1900-01-01")))
                 )
-                &&
-                (
-                        (date1.isAfter(productLaunchDate)) &&
-                        (date2.isAfter(date1)) &&
-                        (date2.isEqual(productEndDate))
-                )
+                        &&
+                        (
+                                (date1.isAfter(productLaunchDate)) &&
+                                        (date2.isAfter(date1)) &&
+                                        (productLaunchDate.isBefore(productEndDate)) &&
+                                        (date2.isEqual(productEndDate))
+                        )
+
+
         )
 
         {
@@ -400,21 +412,24 @@ public class MainServlet extends HttpServlet {
             balAtMaturity = depositValue + totalInterest;
             balAtMaturity = Math.round(balAtMaturity * 100d) / 100d; //rounds the value to two decimal places
 
-        }else if(//if only date1, date2 and date3 are provided, are in ascending order and Product End Date equals last Capitalisation Date (date3)
-                 (
-                  !(date1.isEqual(LocalDate.parse("1900-01-01")))
-               && !(date2.isEqual(LocalDate.parse("1900-01-01")))
-               && !(date3.isEqual(LocalDate.parse("1900-01-01")))
-               &&  (date4.isEqual(LocalDate.parse("1900-01-01")))
-                 )
-                        &&
-                (
-                          (date1.isAfter(productLaunchDate))&&
-                          (date2.isAfter(date1))&&
-                          (date3.isAfter(date2))&&
-                          (date3.isEqual(productEndDate))
+        }else if( //if only date1, date2 and date3 are provided, are in ascending order and Product End Date equals last Capitalisation Date (date3)
+                (  !(date1.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        !(date2.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        !(date3.isEqual(LocalDate.parse("1900-01-01"))) &&
+                        (date4.isEqual(LocalDate.parse("1900-01-01")))
                 )
-               )
+                        &&
+                        (
+                                (date1.isAfter(productLaunchDate)) &&
+                                        (date2.isAfter(date1)) &&
+                                        (date3.isAfter(date2)) &&
+                                        (productLaunchDate.isBefore(productEndDate)) &&
+                                        (date3.isEqual(productEndDate))
+                        )
+
+
+        )
+
         {
 
             //compares the days difference between the date stored in productLaunchDate
